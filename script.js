@@ -51,15 +51,51 @@ function adjustDropdownHeight() {
     });
 }
 
+// Hàm chuyển đổi chế độ sáng/tối
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
+    
+    // Cập nhật nội dung nút theo chế độ hiện tại
     const themeToggleBtn = document.getElementById("themeToggleBtn");
     if (document.body.classList.contains('dark-mode')) {
         themeToggleBtn.textContent = "Tối"; // Thay đổi chữ thành "Tối"
+        localStorage.setItem("darkMode", "enabled"); // Lưu trạng thái vào localStorage
     } else {
         themeToggleBtn.textContent = "Sáng"; // Trở lại chữ "Sáng"
+        localStorage.setItem("darkMode", "disabled"); // Lưu trạng thái vào localStorage
     }
 }
+
+// Điều chỉnh căn lề của dropdown dựa trên vị trí
+function adjustDropdownAlignment(dropdown) {
+    const rect = dropdown.getBoundingClientRect();
+    const screenWidth = window.innerWidth;
+
+    // Xóa các lớp căn chỉnh cũ
+    dropdown.classList.remove("align-left", "align-center", "align-right");
+
+    // Kiểm tra và thêm lớp phù hợp
+    if (rect.right > screenWidth) {
+        dropdown.classList.add("align-right");
+    } else if (rect.left < 0) {
+        dropdown.classList.add("align-left");
+    } else {
+        dropdown.classList.add("align-center");
+    }
+}
+
+// Kiểm tra chế độ lưu trong localStorage khi tải trang
+function applySavedMode() {
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode === "enabled") {
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark-mode");
+    }
+}
+
+// Gọi hàm applySavedMode để áp dụng chế độ khi tải trang
+applySavedMode();
 
 const tips = [
  "Mỗi ngày ăn no có thể nhận được hạt dẻ",
