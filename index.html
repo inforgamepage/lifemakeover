@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Trang chủ</title>
+
+</head>
+<body class="body-elements">
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropdown-btn infor-icon" onclick="toggleDropdown('inforDropdown')">Thông tin</button>
+            <div id="inforDropdown" class="dropdown-content">
+                <a href="#">Cốt truyện</a>
+                <a href="#">Lầu quay</a>
+                <a href="#">Sự kiện</a>
+                <a href="#">Mật khẩu thời trang</a>
+                <a href="#">Đồng hành</a>
+                <a href="#">Chụp ảnh</a>
+                <a href="#">Thời trang</a>
+            </div>
+        </div>
+<!--        <div class="dropdown">
+            <button class="dropdown-btn story-icon" onclick="toggleDropdown('storyDropdown')">Cốt truyện</button>
+            <div id="storyDropdown" class="dropdown-content">
+                <a href="#">Cốt truyện tuyến chính</a>
+                <a href="#">Cốt truyện giai đoạn tình ý</a>
+                <a href="#">Cốt truyện lầu giới hạn</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-btn lightchase-icon" onclick="toggleDropdown('lightchaseDropdown')">Lầu quay</button>
+            <div id="lightchaseDropdown" class="dropdown-content">
+                <a href="#">Lầu vĩnh viễn</a>
+                <a href="#">Lầu giới hạn</a>
+                <a href="#">Hộp ước nguyện</a>
+            </div>
+        </div> -->
+        <div class="dropdown"> 
+            <button class="dropdown-btn guilde-icon" onclick="toggleDropdown('guildeDropdown')">Hướng dẫn chơi</button>
+            <div id="guildeDropdown" class="dropdown-content">
+                <a href="quizvi.html">Bách khoa Vvanna</a>
+                <a href="#">Thử thách Vvanna</a>
+            </div>
+        </div>
+<!--        <div class="dropdown">
+            <button class="dropdown-btn scene-icon" onclick="toggleDropdown('backgroundDropdown')">Nền</button>
+            <div id="backgroundDropdown" class="dropdown-content">
+                <a href="#">Nền miễn phí</a>
+                <a href="#">Nền mua</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-btn pose-icon" onclick="toggleDropdown('actionDropdown')">Động tác</button>
+            <div id="actionDropdown" class="dropdown-content">
+                <a href="#">Động tác tĩnh</a>
+                <a href="#">Động tác động</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-btn alley-icon" onclick="toggleDropdown('partnerDropdown')">Đồng hành</button>
+            <div id="partnerDropdown" class="dropdown-content">
+                <a href="#">Đồng hành SSR</a>
+                <a href="#">Đồng hành SR</a>
+                <a href="#">Đồng hành R</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-btn fashion-icon" onclick="toggleDropdown('fashionDropdown')">Thời trang</button>
+            <div id="fashionDropdown" class="dropdown-content">
+                <a href="#">Thời trang cho người</a>
+                <a href="#">Thời trang cho thú cưng</a>
+            </div>
+        </div> -->
+        <div class="dropdown">
+            <button class="dropdown-btn globe-icon" onclick="toggleDropdown('languageDropdown')">Ngôn ngữ</button>
+            <div id="languageDropdown" class="dropdown-content">
+                <a href="#">English</a>
+                <a href="#">Bahasa</a>
+                <a href="#">ภาษาไทย</a>
+                <a href="#">Pусский язык</a>
+                <a href="#">Tiếng Việt</a>
+                <a href="#">中文</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button id="themeToggleBtn" class="dropdown-btn theme-icon" onclick="toggleTheme()">Sáng</button>
+        </div>
+    </div>
+    <div class="main-container tipsh">
+        <h1>Một số mẹo chơi</h1>
+        <div class="tips-container">
+            <div class="tips-content" id="tipsContent">Hãy chăm chỉ luyện tập mỗi ngày!</div>
+            <div class="buttons">
+                <button id="prevBtn"><</button>
+                <button id="playPauseBtn">❚❚</button>
+                <button id="nextBtn">></button>
+            </div>
+            <div class="tip-counter" id="tipCounter">1/5</div>
+        </div>
+        </div>
+<footer class="footer">
+    <div class="version">
+        <a href="#" target="_blank" aria-label="SGMY"><img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/465401902_594285636278445_5173138900862067601_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=teFXG7HUvVwQ7kNvgFC-eqV&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&_nc_gid=AumxE3Bj7HW8yICHPzvCCc5&oh=00_AYCG_ILDzM_25opfuMKsFa_0EFynm4bkRZiUH6seTsWJPQ&oe=672BF43D" alt="SGMY"></a>
+        <a href="#" target="_blank" aria-label="JP"><img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/465430590_594833692890306_1983923336165870172_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=hqyvZ_jT6I0Q7kNvgGqMl5Y&_nc_zt=23&_nc_ht=scontent.fhan14-1.fna&_nc_gid=AlfS6-EDYa-0XfRsI9NOqsy&oh=00_AYCVDN2b8n2pip6R_OtnNVr7zp0TWhg_zm3IqoksIsWtDw&oe=672D0DD7" alt="JP"></a>
+        <a href="#" target="_blank" aria-label="CN"><img src="https://scontent.fhan14-4.fna.fbcdn.net/v/t39.30808-6/465270091_594285566278452_7467768867169752109_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=JXo4FTZlTi0Q7kNvgEQbAEj&_nc_zt=23&_nc_ht=scontent.fhan14-4.fna&_nc_gid=AbVLTW4V96EUDFzOq-j-0DG&oh=00_AYAqTK-3sv8Xx8hx_Y91B-_MKvu-uCFfZL2qQzjjk8PVPw&oe=672BF579" alt="CN"></a>
+        <a href="#" target="_blank" aria-label="Global"><img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/465220547_594285579611784_3412323692812513031_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=sPvLsMNhAvIQ7kNvgENbVGj&_nc_zt=23&_nc_ht=scontent.fhan14-1.fna&_nc_gid=AM8ulEUf3iXktx3aelwCbdG&oh=00_AYD8Ag7-hrnLSZggCvoke77a94RXYVSzwVJNWUNR8Fyz2w&oe=672C19F8" alt="Global"></a>
+        <a href="#" target="_blank" aria-label="VN"><img src="https://scontent.fhan14-5.fna.fbcdn.net/v/t39.30808-6/465468014_594285662945109_3427509265727002851_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=XBsaE_jZ4S4Q7kNvgGe6LJK&_nc_zt=23&_nc_ht=scontent.fhan14-5.fna&_nc_gid=AQILA2bluF-LHbKqd_QmXuU&oh=00_AYB66BdEy0-1exrJYCpkEQ-nTkbzWEgL5ca4LUFifN75XA&oe=672C19C2" alt="VN"></a>
+    </div>
+    <div class="info">
+        <p>Chơi quá 180 phút một ngày sẽ ảnh hưởng xấu đến sức khỏe.
+        <br>
+    <br>
+        Trò chơi điện tử "Life Makeover" là trò chơi dành cho người lớn (từ 18 tuổi trở lên).
+        <br>
+    <br>
+        Mọi thông tin được tổng hợp dựa trên nội dung từ trò chơi "Life Makeover" của Archosaur Games và thuộc sở hữu của Archosaur Games.</p>
+    </div>
+</footer>
+    <script src="vetrangchu.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
