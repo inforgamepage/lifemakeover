@@ -51,37 +51,38 @@ function adjustDropdownHeight() {
     });
 }
 
-// Hàm chuyển đổi chế độ sáng/tối
+// Hàm chuyển đổi và áp dụng chế độ sáng/tối
 function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
+    // Chuyển đổi lớp chế độ tối cho body
+    const isDarkMode = document.body.classList.toggle("dark-mode");
     
-    // Cập nhật nội dung nút theo chế độ hiện tại
-    const themeToggleBtn = document.getElementById("themeToggleBtn");
-    if (document.body.classList.contains('dark-mode')) {
-        themeToggleBtn.textContent = "Tối"; // Thay đổi chữ thành "Tối"
-        localStorage.setItem("darkMode", "enabled"); // Lưu trạng thái vào localStorage
-    } else {
-        themeToggleBtn.textContent = "Sáng"; // Trở lại chữ "Sáng"
-        localStorage.setItem("darkMode", "disabled"); // Lưu trạng thái vào localStorage
-    }
+    // Cập nhật trạng thái chế độ vào localStorage
+    const theme = isDarkMode ? "dark" : "light";
+    localStorage.setItem("theme", theme);
+    
+    // Cập nhật nội dung nút
+    updateToggleText();
 }
 
-// Hàm kiểm tra và áp dụng trạng thái chế độ sáng/tối khi tải trang
-function applySavedTheme() {
+// Hàm cập nhật nội dung nút dựa trên chế độ hiện tại
+function updateToggleText() {
     const themeToggleBtn = document.getElementById("themeToggleBtn");
-    const darkMode = localStorage.getItem("darkMode");
-
-    if (darkMode === "enabled") {
-        document.body.classList.add('dark-mode'); // Kích hoạt chế độ tối
-        themeToggleBtn.textContent = "Tối"; // Cập nhật nút thành "Tối"
-    } else {
-        document.body.classList.remove('dark-mode'); // Tắt chế độ tối
-        themeToggleBtn.textContent = "Sáng"; // Cập nhật nút thành "Sáng"
-    }
+    const theme = document.body.classList.contains("dark-mode") ? "Tối" : "Sáng";
+    themeToggleBtn.textContent = theme;
 }
 
-// Gọi hàm applySavedTheme khi trang tải
-window.addEventListener('DOMContentLoaded', applySavedTheme);
+// Áp dụng trạng thái lưu trong localStorage khi trang tải
+window.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    
+    // Kiểm tra nếu chế độ tối được lưu và kích hoạt nếu có
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+    
+    // Cập nhật nội dung nút theo chế độ
+    updateToggleText();
+});
 
 
 
