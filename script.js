@@ -66,6 +66,26 @@ function toggleTheme() {
     }
 }
 
+// Hàm kiểm tra và áp dụng trạng thái chế độ sáng/tối khi tải trang
+function applySavedTheme() {
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const darkMode = localStorage.getItem("darkMode");
+
+    if (darkMode === "enabled") {
+        document.body.classList.add('dark-mode'); // Kích hoạt chế độ tối
+        themeToggleBtn.textContent = "Tối"; // Cập nhật nút thành "Tối"
+    } else {
+        document.body.classList.remove('dark-mode'); // Tắt chế độ tối
+        themeToggleBtn.textContent = "Sáng"; // Cập nhật nút thành "Sáng"
+    }
+}
+
+// Gọi hàm applySavedTheme khi trang tải
+window.addEventListener('DOMContentLoaded', applySavedTheme);
+
+
+
+
 // Điều chỉnh căn lề của dropdown dựa trên vị trí
 function adjustDropdownAlignment(dropdown) {
     const rect = dropdown.getBoundingClientRect();
