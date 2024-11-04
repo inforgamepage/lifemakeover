@@ -1,21 +1,49 @@
-document.getElementById("homepage").addEventListener("click", function() {
-    window.location.href = "index.html"; // Chuyển hướng đến URL
+const homeButton = document.getElementById("homepage");
+
+homeButton.addEventListener("click", function() {
+    window.location.href = "https://anh733.github.io/LM/index.html";
 });
 
-// Điều chỉnh căn lề của dropdown dựa trên vị trí
-function adjustDropdownAlignment(dropdown) {
-    const rect = dropdown.getBoundingClientRect();
-    const screenWidth = window.innerWidth;
+homeButton.addEventListener("touchstart", function() {
+    window.location.href = "https://anh733.github.io/LM/index.html";
+});
 
-    // Xóa các lớp căn chỉnh cũ
-    dropdown.classList.remove("align-left", "align-center", "align-right");
 
-    // Kiểm tra và thêm lớp phù hợp
-    if (rect.right > screenWidth) {
-        dropdown.classList.add("align-right");
-    } else if (rect.left < 0) {
-        dropdown.classList.add("align-left");
+
+function searchQuestions() {
+    // Lấy giá trị tìm kiếm từ ô input
+    const searchTerm = document.getElementById("searchBar").value.toLowerCase();
+    const questions = document.querySelectorAll("#questionsContainer p");
+    const questionsContainer = document.getElementById("questionsContainer");
+
+    // Tạo một mảng để lưu trữ các câu hỏi tìm thấy
+    const foundQuestions = [];
+
+    // Lặp qua tất cả các câu hỏi và hiển thị hoặc ẩn
+    questions.forEach(question => {
+        const questionText = question.textContent.toLowerCase();
+        if (questionText.includes(searchTerm)) {
+            foundQuestions.push(question); // Thêm câu hỏi vào mảng
+        }
+    });
+
+    // Nếu tìm thấy câu hỏi, di chuyển chúng lên trên cùng
+    if (foundQuestions.length > 0) {
+        foundQuestions.forEach(question => {
+            questionsContainer.prepend(question); // Di chuyển câu hỏi lên đầu
+        });
+    }
+
+    // Reset lại hiển thị nếu ô tìm kiếm trống
+    if (searchTerm === "") {
+        questions.forEach(question => {
+            question.style.display = "block"; // Hiển thị tất cả câu hỏi
+        });
     } else {
-        dropdown.classList.add("align-center");
+        // Ẩn các câu hỏi không tìm thấy
+        questions.forEach(question => {
+            const questionText = question.textContent.toLowerCase();
+            question.style.display = foundQuestions.includes(question) ? "block" : "none";
+        });
     }
 }
