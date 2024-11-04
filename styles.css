@@ -326,7 +326,7 @@ footer p {
         font-size: 24px; /* Giữ kích thước của icon */
         margin-right: 0; /* Xóa khoảng cách icon và chữ */
     }
-    .tips-container, .quiz {
+    .tips-container, .question {
         width: 80vw; /* Chiều rộng chiếm 90% khung nhìn */
         max-width: 450px; /* Giới hạn chiều rộng tối đa */
     }
@@ -351,7 +351,7 @@ Khi màn hình <= 240px như JioPhone2
         width: 50vw; /* Chiều rộng chiếm 60% khung nhìn */
         max-width: 70px;
     }
-    .tips-container, .quiz {
+    .tips-container, .question {
         width: 60vw; /* Chiều rộng chiếm 90% khung nhìn */
         max-width: 200px; /* Giới hạn chiều rộng tối đa */
     }
@@ -364,10 +364,38 @@ h1 {text-align: center;}
     text-align: justify;
 }
 
-.quiz {
-    justify-content: justify;
+#searchBar {
+    width: 80vw;
+    padding: 10px;
+    margin: 15px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#questionsContainer {
+    text-align: justify; /* Căn đều hai bên cho nội dung */
+    margin-top: 10px; /* Khoảng cách giữa thanh tìm kiếm và các câu hỏi */
+}
+
+#questionsContainer p {
+    margin: 1.5em 0; /* Khoảng cách đều giữa các thẻ p */
+    line-height: 1.4; /* Đảm bảo chiều cao dòng */
 }
 
 .cnfont {
     font-family: Simsun;
+}
+
+body.dark-mode input[type="text"] {
+    background-color: #333333; /* Màu nền tối cho ô input */
+    color: rgb(175, 175, 175); /* Màu chữ sáng */
+    border: 1px solid #555555; /* Đường viền ô input */
+    padding: 10px; /* Đệm bên trong cho ô input */
+    border-radius: 5px; /* Bo góc cho ô input */
+}
+
+body.dark-mode input[type="text"]:focus {
+    border-color: #007BFF; /* Đổi màu đường viền khi ô input được chọn */
+    outline: none; /* Bỏ đường viền mặc định */
 }
