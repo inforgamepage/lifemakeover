@@ -140,7 +140,7 @@ function showTip(index) {
 }
 
 function updateCounter() {
-    tipCounter.textContent = `Mẹo ${currentTipIndex + 1}/${tips.length}`;
+    tipCounter.textContent = `${currentTipIndex + 1}/${tips.length}`;
 }
 
 document.getElementById("prevBtn")
