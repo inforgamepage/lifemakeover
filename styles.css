@@ -246,6 +246,9 @@ body {
     font-size: 1em;
     color: black;
     margin-top: 20px; /* Tạo khoảng cách giữa số thứ tự và nút bấm */
+    display: flex; /* Sử dụng flexbox để sắp xếp phần tử theo hàng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa hai phần tử, tùy chỉnh theo ý muốn */
 }
 
 .buttons {
