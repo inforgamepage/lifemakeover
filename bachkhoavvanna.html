@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://inforgamepage.github.io/lifemakeover/styles.css">
     <title>Bách khoa Vvanna</title>
-    <style>
-      /* Nếu muốn override CSS search results */
-      .question p { margin-bottom: 12px; }
-      .no-result { text-align: center; color: #999; font-style: italic; margin-top: 20px; display: none; }
-    </style>
 </head>
 <body class="body-elements">
+    <!-- Navbar giữ nguyên -->
     <div class="navbar">
         <div class="dropdown">
             <button class="dropdown-btn homepage-icon" id="homepage">Trang chủ</button>   
@@ -50,15 +46,17 @@
         </div>
     </div>
 
+    <!-- Nội dung chính -->
     <div class="main-container qna">
         <h1>Bách khoa Vvanna</h1>
         <input type="text" id="searchBar" placeholder="Tìm kiếm câu hỏi..." onkeyup="searchQuestions()">
         <div class="question" id="questionsContainer"></div>
-        <div id="no-result" class="no-result">
-          Không tìm thấy nội dung phù hợp, đảm bảo gõ chính xác hoặc chọn đúng ngôn ngữ và thử lại.
+        <div id="no-result" style="text-align:center;color:#999;font-style:italic;margin-top:20px;display:none;">
+            Không tìm thấy nội dung phù hợp, đảm bảo gõ chính xác hoặc chọn đúng ngôn ngữ và thử lại.
         </div>
     </div>
 
+    <!-- Footer giữ nguyên y hệt -->
     <footer class="footer">
         <div class="version">
             <a href="#" target="_blank" aria-label="SGMY"><img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/465401902_594285636278445_5173138900862067601_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=teFXG7HUvVwQ7kNvgFC-eqV&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&_nc_gid=AumxE3Bj7HW8yICHPzvCCc5&oh=00_AYCG_ILDzM_25opfuMKsFa_0EFynm4bkRZiUH6seTsWJPQ&oe=672BF43D" alt="SGMY"></a>
@@ -76,9 +74,11 @@
         </div>
     </footer>
 
+    <!-- Scripts gốc -->
     <script src="https://inforgamepage.github.io/lifemakeover/vetrangchu.js"></script>
     <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 
+    <!-- Script fetch CSV -->
     <script>
       const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
       const container = document.getElementById("questionsContainer");
@@ -86,7 +86,7 @@
       const noResult = document.getElementById("no-result");
       let entries = [];
 
-      function render(list) {
+      function render(list){
         container.innerHTML = "";
         if(list.length === 0){
           noResult.style.display = "block";
@@ -112,13 +112,10 @@
           .then(res => res.text())
           .then(text => {
             const lines = text.trim().split("\n");
-            const headers = lines.shift().split(",");
+            lines.shift(); // bỏ header
             entries = lines.map(line => {
               const cols = line.split(",");
-              return {
-                title: cols[0],
-                content: cols[1]
-              };
+              return { title: cols[0], content: cols[1] };
             });
             render(entries);
           });
