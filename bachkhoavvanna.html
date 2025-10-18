@@ -76,17 +76,6 @@
 <button id="scrollBottomBtn" class="scroll-btn">▼ Xuống cuối</button>
 
 <script>
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-    const scrollBottomBtn = document.getElementById("scrollBottomBtn");
-
-    scrollTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    scrollBottomBtn.addEventListener("click", () => {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    });
-    
 const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
 let entries = [];
 let searching = false;
@@ -158,6 +147,7 @@ setInterval(fetchCSV, 1000);
 <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 </body>
 </html>
+
 
 
 
