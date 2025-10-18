@@ -87,63 +87,69 @@
     <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 
     <!-- Script search fix -->
-    <script>
-        const searchBar = document.getElementById('searchBar');
-        const questionsContainer = document.getElementById('questionsContainer');
-        const searchResultsContainer = document.getElementById('searchResultsContainer');
-        const noResult = document.getElementById('no-result');
+   <script>
+let isSearching = false;
 
-        function searchQuestions() {
-            const query = searchBar.value.toLowerCase().trim();
-            if(query === "") {
-                searchResultsContainer.style.display = "none";
-                questionsContainer.style.display = "block";
-                noResult.style.display = "none";
-                return;
+const searchBar = document.getElementById('searchBar');
+const questionsContainer = document.getElementById('questionsContainer');
+const searchResultsContainer = document.getElementById('searchResultsContainer');
+const noResult = document.getElementById('no-result');
+
+async function fetchCSV() {
+    if(isSearching) return; // Nếu đang search thì không fetch
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv');
+        const data = await response.text();
+        const rows = data.split('\n').slice(1);
+        questionsContainer.innerHTML = '';
+        rows.forEach(row => {
+            const cols = row.split(',');
+            if(cols.length >= 2){
+                const question = cols[0].trim();
+                const answer = cols[1].trim();
+                if(question && answer){
+                    const p = document.createElement('p');
+                    p.innerHTML = `<strong>Câu hỏi: </strong>${question}<br><strong>Đáp án: </strong>${answer}`;
+                    questionsContainer.appendChild(p);
+                }
             }
+        });
+    } catch(err){
+        console.error(err);
+    }
+}
 
-            const questions = Array.from(questionsContainer.querySelectorAll("p"));
-            let matched = questions.filter(q => q.innerText.toLowerCase().includes(query));
+function searchQuestions() {
+    const query = searchBar.value.toLowerCase().trim();
+    if(query === ""){
+        isSearching = false;
+        searchResultsContainer.style.display = "none";
+        questionsContainer.style.display = "block";
+        noResult.style.display = "none";
+        return;
+    }
 
-            searchResultsContainer.innerHTML = "";
-            if(matched.length === 0){
-                searchResultsContainer.style.display = "block";
-                questionsContainer.style.display = "none";
-                noResult.style.display = "block";
-            } else {
-                matched.forEach(m => searchResultsContainer.appendChild(m.cloneNode(true)));
-                searchResultsContainer.style.display = "block";
-                questionsContainer.style.display = "none";
-                noResult.style.display = "none";
-            }
-        }
+    isSearching = true;
+    const questions = Array.from(questionsContainer.querySelectorAll("p"));
+    let matched = questions.filter(q => q.innerText.toLowerCase().includes(query));
 
-        // Fetch CSV từ Google Sheet và render vào questionsContainer
-        async function fetchCSV() {
-            try {
-                const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv');
-                const data = await response.text();
-                const rows = data.split('\n').slice(1); // bỏ hàng header
-                questionsContainer.innerHTML = '';
-                rows.forEach(row => {
-                    const cols = row.split(',');
-                    if(cols.length >= 2){
-                        const question = cols[0].trim();
-                        const answer = cols[1].trim();
-                        if(question && answer){
-                            const p = document.createElement('p');
-                            p.innerHTML = `<strong>Câu hỏi: </strong>${question}<br><strong>Đáp án: </strong>${answer}`;
-                            questionsContainer.appendChild(p);
-                        }
-                    }
-                });
-            } catch(err){
-                console.error(err);
-            }
-        }
+    searchResultsContainer.innerHTML = "";
+    if(matched.length === 0){
+        searchResultsContainer.style.display = "block";
+        questionsContainer.style.display = "none";
+        noResult.style.display = "block";
+    } else {
+        matched.forEach(m => searchResultsContainer.appendChild(m.cloneNode(true)));
+        searchResultsContainer.style.display = "block";
+        questionsContainer.style.display = "none";
+        noResult.style.display = "none";
+    }
+}
 
-        fetchCSV();
-        setInterval(fetchCSV, 1000); // cập nhật CSV mỗi giây
-    </script>
+fetchCSV();
+setInterval(fetchCSV, 1000); // tự động cập nhật CSV mỗi giây nhưng tạm dừng khi search
+</script>
+
 </body>
 </html>
+
