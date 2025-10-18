@@ -128,25 +128,28 @@ showTip(currentTipIndex);
 startAutoPlay();
 
 // ---------------- Scroll Buttons ----------------
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+document.addEventListener("DOMContentLoaded", () => {
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-// Xác định vùng scroll: trang con .main-container hay window
-function getScrollContainer() {
-    return document.querySelector(".main-container") || window;
-}
+    if(scrollTopBtn || scrollBottomBtn){
+        function getScrollContainer() {
+            return document.querySelector(".main-container") || window;
+        }
 
-function scrollToTop() {
-    const container = getScrollContainer();
-    if(container === window) window.scrollTo({ top: 0, behavior: "smooth" });
-    else container.scrollTo({ top: 0, behavior: "smooth" });
-}
+        function scrollToTop() {
+            const container = getScrollContainer();
+            if(container === window) window.scrollTo({ top: 0, behavior: "smooth" });
+            else container.scrollTo({ top: 0, behavior: "smooth" });
+        }
 
-function scrollToBottom() {
-    const container = getScrollContainer();
-    if(container === window) window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    else container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
-}
+        function scrollToBottom() {
+            const container = getScrollContainer();
+            if(container === window) window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+            else container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+        }
 
-if(scrollTopBtn) scrollTopBtn.addEventListener("click", scrollToTop);
-if(scrollBottomBtn) scrollBottomBtn.addEventListener("click", scrollToBottom);
+        if(scrollTopBtn) scrollTopBtn.addEventListener("click", scrollToTop);
+        if(scrollBottomBtn) scrollBottomBtn.addEventListener("click", scrollToBottom);
+    }
+});
