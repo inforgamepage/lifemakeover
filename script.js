@@ -128,35 +128,16 @@ showTip(currentTipIndex);
 startAutoPlay();
 
 // ---------------- Scroll Buttons ----------------
-document.addEventListener("DOMContentLoaded", () => {
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-    const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-    if (!scrollTopBtn && !scrollBottomBtn) return; // Không có nút nào, bỏ qua
+// Cuộn lên đầu trang
+scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-    // Chọn container chính hoặc fallback window
-    const container = document.querySelector(".main-container") || window;
-
-    // Scroll lên đầu trang
-    if(scrollTopBtn){
-        scrollTopBtn.addEventListener("click", () => {
-            if(container === window){
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            } else {
-                container.scrollTo({ top: 0, behavior: "smooth" });
-            }
-        });
-    }
-
-    // Scroll xuống cuối trang
-    if(scrollBottomBtn){
-        scrollBottomBtn.addEventListener("click", () => {
-            if(container === window){
-                window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-            } else {
-                container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
-            }
-        });
-    }
+// Cuộn xuống cuối trang
+scrollBottomBtn.addEventListener("click", () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 });
 
