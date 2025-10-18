@@ -79,50 +79,62 @@
     <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 
     <!-- Script fetch CSV -->
-    <script>
-      const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
-      const container = document.getElementById("questionsContainer");
-      const searchInput = document.getElementById("searchBar");
-      const noResult = document.getElementById("no-result");
-      let entries = [];
+   <script>
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
+const container = document.getElementById("questionsContainer");
+const searchInput = document.getElementById("searchBar");
+const noResult = document.getElementById("no-result");
+let entries = [];
+let isSearching = false;
 
-      function render(list){
-        container.innerHTML = "";
-        if(list.length === 0){
-          noResult.style.display = "block";
-          return;
-        } else {
-          noResult.style.display = "none";
-        }
-        list.forEach(item => {
-          const p = document.createElement("p");
-          p.innerHTML = `<strong>Câu hỏi: </strong>${item.title}<br><strong>Đáp án: </strong>${item.content}`;
-          container.appendChild(p);
-        });
-      }
+function render(list){
+    container.innerHTML = "";
+    if(list.length === 0){
+        noResult.style.display = "block";
+        return;
+    } else {
+        noResult.style.display = "none";
+    }
+    list.forEach(item => {
+        const p = document.createElement("p");
+        p.innerHTML = `<strong>Câu hỏi: </strong>${item.title}<br><strong>Đáp án: </strong>${item.content}`;
+        container.appendChild(p);
+    });
+}
 
-      function searchQuestions() {
-        const query = searchInput.value.toLowerCase();
-        const filtered = entries.filter(item => item.title.toLowerCase().includes(query));
-        render(filtered);
-      }
+function searchQuestions() {
+    const query = searchInput.value.toLowerCase();
+    if(query.trim() === ""){
+        isSearching = false;
+        render(entries);
+        return;
+    }
+    isSearching = true;
+    const filtered = entries.filter(item => item.title.toLowerCase().includes(query));
+    render(filtered);
+}
 
-      function fetchCSV() {
-        fetch(csvUrl)
-          .then(res => res.text())
-          .then(text => {
+function fetchCSV() {
+    fetch(csvUrl)
+        .then(res => res.text())
+        .then(text => {
             const lines = text.trim().split("\n");
             lines.shift(); // bỏ header
             entries = lines.map(line => {
-              const cols = line.split(",");
-              return { title: cols[0], content: cols[1] };
+                const cols = line.split(",");
+                return { title: cols[0], content: cols[1] };
             });
-            render(entries);
-          });
-      }
+            // Chỉ render tự động khi không search
+            if(!isSearching) render(entries);
+        });
+}
 
-      fetchCSV();
-      setInterval(fetchCSV, 1000); // cập nhật CSV mỗi giây
-    </script>
+// Gọi 1 lần ban đầu
+fetchCSV();
+// Cập nhật CSV mỗi giây
+setInterval(fetchCSV, 1000);
+</script>
+
 </body>
 </html>
+
