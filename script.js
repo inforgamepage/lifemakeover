@@ -1,11 +1,10 @@
-// Hàm mở menu thả xuống
+// ---------------- Dropdown Menu ----------------
 function toggleDropdown(id) {
     const dropdown = document.getElementById(id);
     dropdown.classList.toggle("show");
     closeOtherDropdowns(id);
 }
 
-// Đóng các menu khác khi một menu được mở
 function closeOtherDropdowns(openDropdownId) {
     const dropdowns = document.getElementsByClassName("dropdown-content");
     for (let i = 0; i < dropdowns.length; i++) {
@@ -15,22 +14,17 @@ function closeOtherDropdowns(openDropdownId) {
     }
 }
 
-// Thêm sự kiện cho cả 'click' và 'touchstart'
 document.querySelectorAll(".dropdown-btn").forEach((button) => {
-    // Xử lý sự kiện 'touchstart' cho thiết bị di động
     button.addEventListener("touchstart", function (event) {
-        event.preventDefault(); // Ngăn chặn hành vi mặc định
-        toggleDropdown(this.nextElementSibling.id); // Hiển thị danh sách
+        event.preventDefault();
+        toggleDropdown(this.nextElementSibling.id);
     });
-
-    // Xử lý sự kiện 'click' cho thiết bị không cảm ứng
     button.addEventListener("click", function (event) {
-        event.preventDefault(); // Ngăn chặn hành vi mặc định
+        event.preventDefault();
         toggleDropdown(this.nextElementSibling.id);
     });
 });
 
-// Đóng menu khi nhấp ra ngoài
 window.onclick = function (event) {
     if (!event.target.matches('.dropdown-btn') && !event.target.closest('.dropdown-content')) {
         const dropdowns = document.getElementsByClassName("dropdown-content");
@@ -40,84 +34,45 @@ window.onclick = function (event) {
     }
 };
 
-// Điều chỉnh chiều cao của dropdown khi khung nhìn thay đổi
 function adjustDropdownHeight() {
     const dropdowns = document.querySelectorAll(".dropdown-content");
-    const maxDropdownHeight = window.innerHeight * 0.5; // Chiều cao tối đa là 50% khung nhìn
-
+    const maxDropdownHeight = window.innerHeight * 0.5;
     dropdowns.forEach(dropdown => {
         dropdown.style.maxHeight = `${maxDropdownHeight}px`;
-        dropdown.style.overflowY = "auto"; // Cho phép cuộn nếu vượt quá chiều cao tối đa
+        dropdown.style.overflowY = "auto";
     });
 }
 
-// Hàm chuyển đổi và áp dụng chế độ sáng/tối
+// ---------------- Theme ----------------
 function toggleTheme() {
-    // Chuyển đổi lớp chế độ tối cho body
     const isDarkMode = document.body.classList.toggle("dark-mode");
-    
-    // Cập nhật trạng thái chế độ vào localStorage
-    const theme = isDarkMode ? "dark" : "light";
-    localStorage.setItem("theme", theme);
-    
-    // Cập nhật nội dung nút
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
     updateToggleText();
 }
 
-// Hàm cập nhật nội dung nút dựa trên chế độ hiện tại
 function updateToggleText() {
     const themeToggleBtn = document.getElementById("themeToggleBtn");
     const theme = document.body.classList.contains("dark-mode") ? "Tối" : "Sáng";
     themeToggleBtn.textContent = theme;
 }
 
-// Áp dụng trạng thái lưu trong localStorage khi trang tải
 window.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
-    
-    // Kiểm tra nếu chế độ tối được lưu và kích hoạt nếu có
-    if (savedTheme === "dark") {
-        document.body.classList.add("dark-mode");
-    }
-    
-    // Cập nhật nội dung nút theo chế độ
+    if (savedTheme === "dark") document.body.classList.add("dark-mode");
     updateToggleText();
 });
 
-
-
-
-// Điều chỉnh căn lề của dropdown dựa trên vị trí
+// ---------------- Dropdown Alignment ----------------
 function adjustDropdownAlignment(dropdown) {
     const rect = dropdown.getBoundingClientRect();
     const screenWidth = window.innerWidth;
-
-    // Xóa các lớp căn chỉnh cũ
     dropdown.classList.remove("align-left", "align-center", "align-right");
-
-    // Kiểm tra và thêm lớp phù hợp
-    if (rect.right > screenWidth) {
-        dropdown.classList.add("align-right");
-    } else if (rect.left < 0) {
-        dropdown.classList.add("align-left");
-    } else {
-        dropdown.classList.add("align-center");
-    }
+    if (rect.right > screenWidth) dropdown.classList.add("align-right");
+    else if (rect.left < 0) dropdown.classList.add("align-left");
+    else dropdown.classList.add("align-center");
 }
 
-// Kiểm tra chế độ lưu trong localStorage khi tải trang
-function applySavedMode() {
-    const savedMode = localStorage.getItem("darkMode");
-    if (savedMode === "enabled") {
-        document.body.classList.add("dark-mode");
-    } else {
-        document.body.classList.remove("dark-mode");
-    }
-}
-
-// Gọi hàm applySavedMode để áp dụng chế độ khi tải trang
-applySavedMode();
-
+// ---------------- Tip Rotation ----------------
 const tips = [
  "Mỗi ngày ăn no có thể nhận được hạt dẻ",
  "Món ăn đã nấu chỉ để được tối đa một ngày theo thời gian thực",
@@ -128,73 +83,70 @@ const tips = [
 
 let currentTipIndex = 0;
 let intervalId;
-const tipsContent = document
- .getElementById("tipsContent");
-const playPauseBtn = document
- .getElementById("playPauseBtn");
+const tipsContent = document.getElementById("tipsContent");
+const playPauseBtn = document.getElementById("playPauseBtn");
 const tipCounter = document.getElementById("tipCounter"); 
 
 function showTip(index) {
- tipsContent.textContent = tips[index];
- updateCounter();
+    tipsContent.textContent = tips[index];
+    updateCounter();
 }
 
 function updateCounter() {
     tipCounter.textContent = `${currentTipIndex + 1}/${tips.length}`;
 }
 
-document.getElementById("prevBtn")
- .addEventListener("click", () => {
-  currentTipIndex = (currentTipIndex >
-    0) ? currentTipIndex - 1 : tips
-   .length - 1;
-  showTip(currentTipIndex);
- });
+document.getElementById("prevBtn").addEventListener("click", () => {
+    currentTipIndex = (currentTipIndex > 0) ? currentTipIndex - 1 : tips.length - 1;
+    showTip(currentTipIndex);
+});
 
-document.getElementById("nextBtn")
- .addEventListener("click", () => {
-  currentTipIndex = (currentTipIndex +
-   1) % tips.length;
-  showTip(currentTipIndex);
- });
+document.getElementById("nextBtn").addEventListener("click", () => {
+    currentTipIndex = (currentTipIndex + 1) % tips.length;
+    showTip(currentTipIndex);
+});
 
-// Bắt đầu chạy tự động khi trang được tải
 function startAutoPlay() {
- intervalId = setInterval(() => {
-  currentTipIndex = (currentTipIndex +
-   1) % tips.length;
-  showTip(currentTipIndex);
- }, 3000); // 3 giây
+    intervalId = setInterval(() => {
+        currentTipIndex = (currentTipIndex + 1) % tips.length;
+        showTip(currentTipIndex);
+    }, 3000);
 }
 
-// Dừng hoặc chạy tự động khi bấm nút
-playPauseBtn.addEventListener("click",
- () => {
-  if (intervalId) {
-   clearInterval(intervalId);
-   intervalId = null;
-   playPauseBtn.textContent =
-    "▶"; // Chạy
-  } else {
-   startAutoPlay();
-   playPauseBtn.textContent =
-    "❚❚"; // Dừng
-  }
- });
+playPauseBtn.addEventListener("click", () => {
+    if(intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+        playPauseBtn.textContent = "▶";
+    } else {
+        startAutoPlay();
+        playPauseBtn.textContent = "❚❚";
+    }
+});
 
-// Khởi tạo tip đầu tiên và bắt đầu tự động
 showTip(currentTipIndex);
 startAutoPlay();
 
+// ---------------- Scroll Buttons ----------------
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-// Cuộn lên đầu trang
-scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-});
+// Xác định vùng scroll: trang con .main-container hay window
+function getScrollContainer() {
+    return document.querySelector(".main-container") || window;
+}
 
-// Cuộn xuống cuối trang
-scrollBottomBtn.addEventListener("click", () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-});
+function scrollToTop() {
+    const container = getScrollContainer();
+    if(container === window) window.scrollTo({ top: 0, behavior: "smooth" });
+    else container.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function scrollToBottom() {
+    const container = getScrollContainer();
+    if(container === window) window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    else container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+}
+
+if(scrollTopBtn) scrollTopBtn.addEventListener("click", scrollToTop);
+if(scrollBottomBtn) scrollBottomBtn.addEventListener("click", scrollToBottom);
