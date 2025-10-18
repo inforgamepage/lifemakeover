@@ -132,24 +132,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const scrollTopBtn = document.getElementById("scrollTopBtn");
     const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-    if(scrollTopBtn || scrollBottomBtn){
-        function getScrollContainer() {
-            return document.querySelector(".main-container") || window;
-        }
+    if (!scrollTopBtn && !scrollBottomBtn) return; // Không có nút nào, bỏ qua
 
-        function scrollToTop() {
-            const container = getScrollContainer();
-            if(container === window) window.scrollTo({ top: 0, behavior: "smooth" });
-            else container.scrollTo({ top: 0, behavior: "smooth" });
-        }
+    // Chọn container chính hoặc fallback window
+    const container = document.querySelector(".main-container") || window;
 
-        function scrollToBottom() {
-            const container = getScrollContainer();
-            if(container === window) window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-            else container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
-        }
+    // Scroll lên đầu trang
+    if(scrollTopBtn){
+        scrollTopBtn.addEventListener("click", () => {
+            if(container === window){
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                container.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    }
 
-        if(scrollTopBtn) scrollTopBtn.addEventListener("click", scrollToTop);
-        if(scrollBottomBtn) scrollBottomBtn.addEventListener("click", scrollToBottom);
+    // Scroll xuống cuối trang
+    if(scrollBottomBtn){
+        scrollBottomBtn.addEventListener("click", () => {
+            if(container === window){
+                window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+            } else {
+                container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+            }
+        });
     }
 });
+
