@@ -83,15 +83,16 @@
     </footer>
 
     <!-- JS -->
-   <script>
-let entries = []; // dữ liệu chính
+<script>
+let entries = [];
+let searching = false;
 const container = document.getElementById("questionsContainer");
 const search = document.getElementById("searchBar");
-const noResult = document.getElementById("no-result"); // nếu có phần hiển thị "Không tìm thấy..."
+const noResult = document.getElementById("no-result");
 
 function render(list) {
     container.innerHTML = "";
-    if(list.length === 0) {
+    if(list.length === 0){
         noResult.style.display = "block";
         return;
     }
@@ -105,7 +106,8 @@ function render(list) {
 
 function filterSearch() {
     const kw = search.value.trim().toLowerCase();
-    if(!kw) {
+    searching = kw.length > 0;
+    if(!searching) {
         render(entries);
         return;
     }
@@ -121,12 +123,11 @@ search.addEventListener("keypress", e => {
     if(e.key === "Enter") filterSearch();
 });
 
-// Hàm fetch CSV
 async function fetchCSV() {
     try {
         const response = await fetch("YOUR_CSV_URL_HERE");
         const text = await response.text();
-        const rows = text.split("\n").slice(1); // bỏ hàng header
+        const rows = text.split("\n").slice(1);
         const newEntries = rows.map(r => {
             const [question, answer] = r.split(",");
             return {question: question || "", answer: answer || ""};
@@ -134,25 +135,21 @@ async function fetchCSV() {
 
         entries = newEntries;
 
-        // Chỉ render lại nếu search đang trống
-        if(!search.value.trim()) {
-            render(entries);
-        } else {
-            filterSearch(); // render danh sách theo từ khóa đang gõ
-        }
+        // Chỉ render nếu người dùng không đang search
+        if(!searching) render(entries);
+        // Nếu đang search, không làm gì, để người dùng tự filter
     } catch(err) {
         console.error("Fetch CSV lỗi:", err);
     }
 }
 
-// Fetch mỗi 1 giây
-fetchCSV(); // fetch ngay lúc load trang
+fetchCSV();
 setInterval(fetchCSV, 1000);
-
 </script>
 
 
 </body>
 </html>
+
 
 
