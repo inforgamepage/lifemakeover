@@ -186,40 +186,48 @@ playPauseBtn.addEventListener("click",
 showTip(currentTipIndex);
 startAutoPlay();
 
-// Kiểm tra nếu nút scroll tồn tại trên trang mới gán sự kiện
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+function setupScrollButtons(container = window) {
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-if (scrollTopBtn && scrollBottomBtn) {
-    // Cuộn lên đầu trang
+    if (!scrollTopBtn || !scrollBottomBtn) return;
+
+    // Cuộn lên đầu
     scrollTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if(container === window) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            container.scrollTop = 0;
+        }
     });
 
-    // Cuộn xuống cuối trang
+    // Cuộn xuống cuối
     scrollBottomBtn.addEventListener("click", () => {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        if(container === window) {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        } else {
+            container.scrollTop = container.scrollHeight;
+        }
     });
 
     // Ẩn/hiện nút khi cuộn
-    window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY || document.documentElement.scrollTop;
-        if (scrollY > 100) {
-            scrollTopBtn.style.display = "flex";
-        } else {
-            scrollTopBtn.style.display = "none";
-        }
+    const onScroll = () => {
+        const scrollTop = (container === window) ? window.scrollY || document.documentElement.scrollTop : container.scrollTop;
+        const scrollHeight = (container === window) ? document.body.scrollHeight : container.scrollHeight;
+        const clientHeight = (container === window) ? window.innerHeight : container.clientHeight;
 
-        if (scrollY + window.innerHeight < document.body.scrollHeight - 100) {
-            scrollBottomBtn.style.display = "flex";
-        } else {
-            scrollBottomBtn.style.display = "none";
-        }
-    });
+        scrollTopBtn.style.display = (scrollTop > 100) ? "flex" : "none";
+        scrollBottomBtn.style.display = (scrollTop + clientHeight < scrollHeight - 100) ? "flex" : "none";
+    };
 
-    // Ẩn ngay khi trang load
-    scrollTopBtn.style.display = "none";
-    scrollBottomBtn.style.display = "flex";
+    if(container === window) {
+        window.addEventListener("scroll", onScroll);
+    } else {
+        container.addEventListener("scroll", onScroll);
+    }
+
+    onScroll(); // gọi ngay khi load để ẩn/hiện đúng
 }
+
 
 
