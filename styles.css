@@ -402,3 +402,30 @@ body.dark-mode input[type="text"]:focus {
     border-color: #007BFF; /* Đổi màu đường viền khi ô input được chọn */
     outline: none; /* Bỏ đường viền mặc định */
 }
+
+.scroll-btn {
+    position: fixed;
+    right: 20px;
+    padding: 10px 15px;
+    font-size: 18px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.7;
+    z-index: 1000;
+    transition: opacity 0.3s;
+}
+
+.scroll-btn:hover {
+    opacity: 1;
+}
+
+#scrollTopBtn {
+    bottom: 70px; /* cách đáy màn hình */
+}
+
+#scrollBottomBtn {
+    bottom: 20px; /* cách đáy màn hình */
+}
