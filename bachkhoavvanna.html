@@ -48,13 +48,15 @@
     <!-- giữ nguyên <head> và navbar như bạn đã có -->
 <div class="main-container qna">
     <h1>Bách khoa Vvanna</h1>
-    <input type="text" id="searchBar" placeholder="Tìm kiếm...">
+    <input type="text" id="searchBar" placeholder="Tìm kiếm câu hỏi...">
     <div class="question" id="questionsContainer">
         <!-- dữ liệu từ Google Sheet sẽ load vào đây -->
     </div>
+    <div id="noResult" class="no-result" style="display:none;">
+        Không tìm thấy nội dung phù hợp...
+    </div>
 </div>
 
-<!-- thêm PapaParse từ CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
 const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
@@ -63,31 +65,28 @@ let entries = [];
 
 // Load dữ liệu từ CSV
 async function loadData() {
-    const res = await fetch(csvUrl + "?t=" + Date.now()); // tránh cache
-    const csvText = await res.text();
-    const parsed = Papa.parse(csvText, {header: true, skipEmptyLines: true});
-    entries = parsed.data.map(row => ({title: row['title'], content: row['content']}));
-    render(entries);
+    try {
+        const res = await fetch(csvUrl + "?t=" + Date.now());
+        const csvText = await res.text();
+        const parsed = Papa.parse(csvText, {header: true, skipEmptyLines: true});
+        entries = parsed.data.map(row => ({title: row['title'], content: row['content']}));
+        render(entries, false); // false = không hiện thông báo khi mới load
+    } catch(e) {
+        console.error("Load CSV lỗi:", e);
+    }
 }
 
 // Render danh sách câu hỏi
-function render(list) {
+function render(list, showNoResult=true) {
     const container = document.getElementById("questionsContainer");
     const noResult = document.getElementById("noResult");
     container.innerHTML = "";
-    if(list.length === 0){
-        if(!noResult){
-            const div = document.createElement("div");
-            div.id = "noResult";
-            div.className = "no-result";
-            div.textContent = "Không tìm thấy nội dung phù hợp...";
-            container.parentNode.appendChild(div);
-        } else {
-            noResult.style.display = "block";
-        }
+    
+    if(list.length === 0 && showNoResult){
+        noResult.style.display = "block";
         return;
     }
-    if(document.getElementById("noResult")) document.getElementById("noResult").style.display = "none";
+    noResult.style.display = "none";
 
     list.forEach(e => {
         const p = document.createElement("p");
@@ -102,7 +101,7 @@ document.getElementById("searchBar").addEventListener("input", () => {
     const filtered = entries.filter(e => 
         e.title.toLowerCase().includes(kw) || e.content.toLowerCase().includes(kw)
     );
-    render(filtered);
+    render(filtered); // default showNoResult = true
 });
 
 // Load dữ liệu lần đầu
@@ -134,4 +133,5 @@ setInterval(loadData, 1000);
     <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 </body>
 </html>
+
 
