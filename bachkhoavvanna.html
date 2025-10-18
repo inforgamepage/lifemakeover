@@ -49,7 +49,7 @@
 
     <div class="main-container qna">
         <h1>Bách khoa Vvanna</h1>
-        <input type="text" id="searchBar" placeholder="Tìm kiếm câu hỏi..." onkeyup="filterSearch()">
+        <input type="text" id="searchBar" placeholder="Tìm kiếm câu hỏi...">
         <div id="questionsContainer"></div>
         <div id="no-result" class="no-result" style="display:none;">
             Không tìm thấy nội dung phù hợp, đảm bảo gõ chính xác hoặc chọn đúng ngôn ngữ và thử lại.
@@ -66,43 +66,43 @@
             <a href="https://stylight.nex2fun.com/" target="_blank" aria-label="KR"><img src="https://play-lh.googleusercontent.com/d76GrkcaT-nKISQQmbC-QKP9XPov31qAHbqL_zfBMzPJlSoLnSHmavcQbIyhsDeSBUCvTI9JnPhLHOFYqVMR94Q=s96-rw" alt="KR" title="Hàn Quốc"></a>
         </div>
         <div class="info">
-            <p>Chơi quá 180 phút một ngày sẽ ảnh hưởng xấu đến sức khỏe.
-            <br><br>
-            Trò chơi điện tử "Life Makeover" là trò chơi dành cho người lớn (từ 18 tuổi trở lên).
-            <br><br>
+            <p>Chơi quá 180 phút một ngày sẽ ảnh hưởng xấu đến sức khỏe.<br><br>
+            Trò chơi điện tử "Life Makeover" là trò chơi dành cho người lớn (từ 18 tuổi trở lên).<br><br>
             Mọi thông tin được tổng hợp dựa trên nội dung từ trò chơi "Life Makeover" của Archosaur Games và thuộc sở hữu của Archosaur Games.</p>
         </div>
     </footer>
 
 <script>
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
 let entries = [];
 let searching = false;
+
 const container = document.getElementById("questionsContainer");
 const search = document.getElementById("searchBar");
 const noResult = document.getElementById("no-result");
 
-function render(list) {
+function render(list){
     container.innerHTML = "";
     if(list.length === 0){
         noResult.style.display = "block";
         return;
     }
     noResult.style.display = "none";
-    list.forEach(item => {
+    list.forEach(item=>{
         const p = document.createElement("p");
         p.innerHTML = `<strong>Câu hỏi: </strong>${item.question}<br><strong>Đáp án: </strong>${item.answer}`;
         container.appendChild(p);
     });
 }
 
-function filterSearch() {
+function filterSearch(){
     const kw = search.value.trim().toLowerCase();
     searching = kw.length > 0;
     if(!searching) {
         render(entries);
         return;
     }
-    const filtered = entries.filter(item =>
+    const filtered = entries.filter(item=>
         item.question.toLowerCase().includes(kw) ||
         item.answer.toLowerCase().includes(kw)
     );
@@ -114,24 +114,28 @@ search.addEventListener("keypress", e => {
     if(e.key === "Enter") filterSearch();
 });
 
-async function fetchCSV() {
-    try {
-        const response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv");
+async function fetchCSV(){
+    try{
+        const response = await fetch(csvUrl);
         const text = await response.text();
         const rows = text.split("\n").slice(1); // bỏ header
-        const newEntries = rows.map(r => {
-            const [question, answer] = r.split(",");
-            return {question: question || "", answer: answer || ""};
-        }).filter(item => item.question && item.answer);
+        const newEntries = rows.map(r=>{
+            // Dùng split CSV thông minh để giữ nguyên dữ liệu xuống dòng trong cùng 1 ô
+            const match = r.match(/^(?:"((?:[^"]|"")*)"|([^,]*)),(?:"((?:[^"]|"")*)"|([^,]*))/);
+            if(!match) return null;
+            const question = (match[1] || match[2] || "").replace(/""/g,'"').trim();
+            const answer = (match[3] || match[4] || "").replace(/""/g,'"').trim();
+            return {question, answer};
+        }).filter(item => item && item.question && item.answer);
 
         entries = newEntries;
-
         if(!searching) render(entries);
-    } catch(err) {
-        console.error("Fetch CSV lỗi:", err);
+    }catch(err){
+        console.error("Lỗi fetch CSV:", err);
     }
 }
 
+// Lần đầu fetch và fetch lại mỗi giây
 fetchCSV();
 setInterval(fetchCSV, 1000);
 </script>
@@ -140,6 +144,3 @@ setInterval(fetchCSV, 1000);
 <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 </body>
 </html>
-
-
-
