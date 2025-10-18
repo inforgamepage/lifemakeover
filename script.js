@@ -187,40 +187,20 @@ showTip(currentTipIndex);
 startAutoPlay();
 
 //Nút cuộn nhanh
-function setupScrollButtons(container = window) {
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
-    const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+const container = document.querySelector(".main-container.qna") || window;
 
-    if (!scrollTopBtn || !scrollBottomBtn) return;
+scrollTopBtn.addEventListener("click", () => {
+    if(container === window) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+        container.scrollTo({ top: 0, behavior: "smooth" });
+    }
+});
 
-    // luôn hiển thị nút
-    scrollTopBtn.style.display = "flex";
-    scrollBottomBtn.style.display = "flex";
-
-    // Cuộn lên đầu
-    scrollTopBtn.addEventListener("click", () => {
-        if(container === window) {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        } else {
-            container.scrollTop = 0;
-        }
-    });
-
-    // Cuộn xuống cuối
-    scrollBottomBtn.addEventListener("click", () => {
-        if(container === window) {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-        } else {
-            container.scrollTop = container.scrollHeight;
-        }
-    });
-}
-
-// Trang Bách khoa vvanna
-const mainContainer = document.querySelector(".main-container");
-if(mainContainer) {
-    setupScrollButtons(mainContainer);
-} else {
-    // Trang khác dùng window
-    setupScrollButtons();
-}
+scrollBottomBtn.addEventListener("click", () => {
+    if(container === window) {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    } else {
+        container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+    }
+});
