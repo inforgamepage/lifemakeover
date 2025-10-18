@@ -186,11 +186,16 @@ playPauseBtn.addEventListener("click",
 showTip(currentTipIndex);
 startAutoPlay();
 
+//Nút cuộn nhanh
 function setupScrollButtons(container = window) {
     const scrollTopBtn = document.getElementById("scrollTopBtn");
     const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
     if (!scrollTopBtn || !scrollBottomBtn) return;
+
+    // luôn hiển thị nút
+    scrollTopBtn.style.display = "flex";
+    scrollBottomBtn.style.display = "flex";
 
     // Cuộn lên đầu
     scrollTopBtn.addEventListener("click", () => {
@@ -209,25 +214,13 @@ function setupScrollButtons(container = window) {
             container.scrollTop = container.scrollHeight;
         }
     });
-
-    // Ẩn/hiện nút khi cuộn
-    const onScroll = () => {
-        const scrollTop = (container === window) ? window.scrollY || document.documentElement.scrollTop : container.scrollTop;
-        const scrollHeight = (container === window) ? document.body.scrollHeight : container.scrollHeight;
-        const clientHeight = (container === window) ? window.innerHeight : container.clientHeight;
-
-        scrollTopBtn.style.display = (scrollTop > 100) ? "flex" : "none";
-        scrollBottomBtn.style.display = (scrollTop + clientHeight < scrollHeight - 100) ? "flex" : "none";
-    };
-
-    if(container === window) {
-        window.addEventListener("scroll", onScroll);
-    } else {
-        container.addEventListener("scroll", onScroll);
-    }
-
-    onScroll(); // gọi ngay khi load để ẩn/hiện đúng
 }
 
-
-
+// Trang Bách khoa vvanna
+const mainContainer = document.querySelector(".main-container");
+if(mainContainer) {
+    setupScrollButtons(mainContainer);
+} else {
+    // Trang khác dùng window
+    setupScrollButtons();
+}
