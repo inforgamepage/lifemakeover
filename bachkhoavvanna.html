@@ -141,24 +141,13 @@ async function fetchCSV(){
 // Lần đầu fetch và fetch lại mỗi giây
 fetchCSV();
 setInterval(fetchCSV, 1000);
-
-// Scroll lên/xuống
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-const scrollBottomBtn = document.getElementById("scrollBottomBtn");
-
-scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
-scrollBottomBtn.addEventListener("click", () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-});
 </script>
 
 <script src="https://inforgamepage.github.io/lifemakeover/vetrangchu.js"></script>
 <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 </body>
 </html>
+
 
 
 
