@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <div class="main-container qna" id="qnaContainer">
+    <div class="main-container qna">
         <h1>Bách khoa Vvanna</h1>
         <input type="text" id="searchBar" placeholder="Tìm kiếm câu hỏi...">
         <div id="questionsContainer"></div>
@@ -148,22 +148,22 @@ setInterval(fetchCSV, 1000);
 <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 
 <script>
-    const qnaContainer = document.getElementById("qnaContainer");
+const container = document.getElementById("questionsContainer");
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
 scrollTopBtn.addEventListener("click", () => {
-    qnaContainer.scrollTo({ top: 0, behavior: "smooth" });
+    container.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 scrollBottomBtn.addEventListener("click", () => {
-    qnaContainer.scrollTo({ top: qnaContainer.scrollHeight, behavior: "smooth" });
+    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
 });
-
 </script>
 
 </body>
 </html>
+
 
 
 
