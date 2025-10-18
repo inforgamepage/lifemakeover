@@ -83,73 +83,76 @@
     </footer>
 
     <!-- JS -->
-    <script src="https://inforgamepage.github.io/lifemakeover/vetrangchu.js"></script>
-    <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
-
-    <!-- Script search fix -->
    <script>
-let isSearching = false;
+let entries = []; // dữ liệu chính
+const container = document.getElementById("questionsContainer");
+const search = document.getElementById("searchBar");
+const noResult = document.getElementById("no-result"); // nếu có phần hiển thị "Không tìm thấy..."
 
-const searchBar = document.getElementById('searchBar');
-const questionsContainer = document.getElementById('questionsContainer');
-const searchResultsContainer = document.getElementById('searchResultsContainer');
-const noResult = document.getElementById('no-result');
-
-async function fetchCSV() {
-    if(isSearching) return; // Nếu đang search thì không fetch
-    try {
-        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv');
-        const data = await response.text();
-        const rows = data.split('\n').slice(1);
-        questionsContainer.innerHTML = '';
-        rows.forEach(row => {
-            const cols = row.split(',');
-            if(cols.length >= 2){
-                const question = cols[0].trim();
-                const answer = cols[1].trim();
-                if(question && answer){
-                    const p = document.createElement('p');
-                    p.innerHTML = `<strong>Câu hỏi: </strong>${question}<br><strong>Đáp án: </strong>${answer}`;
-                    questionsContainer.appendChild(p);
-                }
-            }
-        });
-    } catch(err){
-        console.error(err);
-    }
-}
-
-function searchQuestions() {
-    const query = searchBar.value.toLowerCase().trim();
-    if(query === ""){
-        isSearching = false;
-        searchResultsContainer.style.display = "none";
-        questionsContainer.style.display = "block";
-        noResult.style.display = "none";
+function render(list) {
+    container.innerHTML = "";
+    if(list.length === 0) {
+        noResult.style.display = "block";
         return;
     }
+    noResult.style.display = "none";
+    list.forEach(item => {
+        const p = document.createElement("p");
+        p.innerHTML = `<strong>Câu hỏi: </strong>${item.question}<br><strong>Đáp án: </strong>${item.answer}`;
+        container.appendChild(p);
+    });
+}
 
-    isSearching = true;
-    const questions = Array.from(questionsContainer.querySelectorAll("p"));
-    let matched = questions.filter(q => q.innerText.toLowerCase().includes(query));
+function filterSearch() {
+    const kw = search.value.trim().toLowerCase();
+    if(!kw) {
+        render(entries);
+        return;
+    }
+    const filtered = entries.filter(item =>
+        item.question.toLowerCase().includes(kw) ||
+        item.answer.toLowerCase().includes(kw)
+    );
+    render(filtered);
+}
 
-    searchResultsContainer.innerHTML = "";
-    if(matched.length === 0){
-        searchResultsContainer.style.display = "block";
-        questionsContainer.style.display = "none";
-        noResult.style.display = "block";
-    } else {
-        matched.forEach(m => searchResultsContainer.appendChild(m.cloneNode(true)));
-        searchResultsContainer.style.display = "block";
-        questionsContainer.style.display = "none";
-        noResult.style.display = "none";
+search.addEventListener("input", filterSearch);
+search.addEventListener("keypress", e => {
+    if(e.key === "Enter") filterSearch();
+});
+
+// Hàm fetch CSV
+async function fetchCSV() {
+    try {
+        const response = await fetch("YOUR_CSV_URL_HERE");
+        const text = await response.text();
+        const rows = text.split("\n").slice(1); // bỏ hàng header
+        const newEntries = rows.map(r => {
+            const [question, answer] = r.split(",");
+            return {question: question || "", answer: answer || ""};
+        }).filter(item => item.question && item.answer);
+
+        entries = newEntries;
+
+        // Chỉ render lại nếu search đang trống
+        if(!search.value.trim()) {
+            render(entries);
+        } else {
+            filterSearch(); // render danh sách theo từ khóa đang gõ
+        }
+    } catch(err) {
+        console.error("Fetch CSV lỗi:", err);
     }
 }
 
-fetchCSV();
-setInterval(fetchCSV, 1000); // tự động cập nhật CSV mỗi giây nhưng tạm dừng khi search
+// Fetch mỗi 1 giây
+fetchCSV(); // fetch ngay lúc load trang
+setInterval(fetchCSV, 1000);
+
 </script>
+
 
 </body>
 </html>
+
 
