@@ -45,123 +45,73 @@
             <button id="themeToggleBtn" class="dropdown-btn theme-icon" onclick="toggleTheme()" ontouchstart="toggleTheme()">Sáng</button>
         </div>
     </div>
-    <div class="main-container qna">
-        <h1>Bách khoa Vvanna</h1>
-        <input type="text" id="searchBar" placeholder="Tìm kiếm câu hỏi..." onkeyup="searchQuestions()">
-        <div class="question" id="questionsContainer">
-            <p><strong>Câu hỏi: </strong>Ai là tác giả cuốn tiểu thuyết suy luận bán chạy Sao Băng Địa Ngục?<br><strong>Đáp án: </strong>Larry</p>
-            <p><strong>Câu hỏi: </strong>Aya Matsumoto là cố vấn chính của thương hiệu thời trang nào?<br><strong>Đáp án: </strong>Ánh Sáng Hổ Phách</p>
-            <p><strong>Câu hỏi: </strong>Bóng Chat có thể hiển thị trong giao diện chat bạn bè ko?<br><strong>Đáp án: </strong>Có thể</p>
-            <p><strong>Câu hỏi: </strong>Bộ phận trang trí nào khi đặt không thể điều chỉnh độ cao.<br><strong>Đáp án: </strong>Tường và Phòng</p>
-            <p><strong>Câu hỏi: </strong>Bộ phận trang trí nào không thể điều chỉnh độ cao.<br><strong>Đáp án: </strong>Tường và Phòng</p>
-            <p><strong>Câu hỏi: </strong>Bồn tắm trong nhà có thể chọn các đồ vật bỏ vào khác nhau, nhưng ko gồm?<br><strong>Đáp án: </strong>Bùn Tảo Cát</p>
-            <p><strong>Câu hỏi: </strong>Cách để có khả năng nâng cao nhận được pet có đặc điểm chỉ định là<br><strong>Đáp án: </strong>Nhân giống với pet có đặc điểm này</p>
-            <p><strong>Câu hỏi: </strong>Cách đơn giản nhất để xóa bỏ một phương án nhuộm nào đó ra khỏi chuỗi chuyển màu của Ánh Sao X là gì?<br><strong>Đáp án: </strong>Xóa nó ra khổi chuỗi nhuộm ánh sao</p>
-            <p><strong>Câu hỏi: </strong>Cách nào không làm cho căn phòng sáng hơn?<br><strong>Đáp án: </strong>Mua nến trang trí</p>
-            <p><strong>Câu hỏi: </strong>Cách nào tăng điểm Đồng Hành?<br><strong>Đáp án: </strong>Tất cả</p>
-            <p><strong>Câu hỏi: </strong>Cách nhận thưởng Thi Đấu Thời Trang nhiều hơn?<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Cách nói nào dưới đây về Khối Gỗ Trong Nhà là không chính xác<br><strong>Đáp án: </strong>Sau khi đặt khối gỗ, không thể đặt nội thất khác</p>
-            <p><strong>Câu hỏi: </strong>Cách tăng điểm đánh giá Thi Đấu Thời Trang?<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Cách tăng điểm Đồng hành<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Câu nào dưới đây mô tả về Pet Shop là đúng?<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Chủ tịch của Endpoint Technologies là ai?<br><strong>Đáp án: </strong>Gerald</p>
-            <p><strong>Câu hỏi: </strong>Có bắt buộc phải có bát cho pet ăn không?<br><strong>Đáp án: </strong>Không</p>
-            <p><strong>Câu hỏi: </strong>Có thể chế tác bộ thời trang ở đâu?<br><strong>Đáp án: </strong>Studio Thời Trang</p>
-            <p><strong>Câu hỏi: </strong>Có thể thăm Nhà của người chơi liên server không?<br><strong>Đáp án: </strong>Có thể</p>
-            <p><strong>Câu hỏi: </strong>Có tối đa bao nhiêu bộ phận để đeo trang sức tóc<br><strong>Đáp án: </strong>10</p>
-            <p><strong>Câu hỏi: </strong>Dùng tính năng nào dưới đây, để điều chỉnh hiệu ứng hiển thị trên giao diện chính<br><strong>Đáp án: </strong>Panel</p>
-            <p><strong>Câu hỏi: </strong>Đâu không phải là cách nhận công thức nấu ăn?<br><strong>Đáp án: </strong>Nấu ăn</p>
-            <p><strong>Câu hỏi: </strong>Đâu không phải là cách nhận Pet<br><strong>Đáp án: </strong>Bạn bè tặng</p>
-            <p><strong>Câu hỏi: </strong>Đâu là hành động không phải của pet<br><strong>Đáp án: </strong>Gặm, cắn nội thất</p>
-            <p><strong>Câu hỏi: </strong>Điểm khác biệt khi pet ngủ tại chỗ và ngủ trên giường là<br><strong>Đáp án: </strong>Ngủ trên giường, sức khỏe hồi phục nhanh hơn</p>
-            <p><strong>Câu hỏi: </strong>Điểm style có tác dụng gì<br><strong>Đáp án: </strong>Thêm thưởng điểm trong ải</p>
-            <p><strong>Câu hỏi: </strong>Điều chỉnh vị trí đeo trang sức tóc, sẽ có hiệu quả với tất cả các kiểu tóc?<br><strong>Đáp án: </strong>Không đúng</p>
-            <p><strong>Câu hỏi: </strong>Điều nào dưới đây giúp tăng điểm style<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Độ No ở trạng thái như thế nào không thể chạy bộ?<br><strong>Đáp án: </strong>Đói<br>(Nếu không có đáp án <strong>Đói</strong> thì chọn đáp án <strong class="cnfont">都可以跑步</strong>)</p>
-            <p><strong>Câu hỏi: </strong>Độ No ở trạng thái như thế nào không thể vận hành thiết bị?<br><strong>Đáp án: </strong>Đói</p>
-            <p><strong>Câu hỏi: </strong>Độ quyến rũ của màu nhuộm có tác dụng gì?<br><strong>Đáp án: </strong>Tăng Style thời trang</p>
-            <p><strong>Câu hỏi: </strong>Độ Sôi Nổi hàng ngày đạt bao nhiêu thì có thể nhận 1 lượt ký bù miễn phí?<br><strong>Đáp án: </strong>90</p>
-            <p><strong>Câu hỏi: </strong>Hành vi nào của đồng hành giúp tăng điểm phong cách<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Hành vi nào sau đây không nhận được Kim Cương?<br><strong>Đáp án: </strong>Bạn bè tặng</p>
-            <p><strong>Câu hỏi: </strong>Khi cài đặt phương án Ánh Sao X, có thể tự do cài đặt nội dung nào?<br><strong>Đáp án: </strong>Tất cả mục trên</p>
-            <p><strong>Câu hỏi: </strong>Khi chụp hình trong hệ thống nhà, thường trượt tay nhấn vào mặt đất, khiến nhân vật chạy thì phải làm sao?<br><strong>Đáp án: </strong>Vào cài đặt tắt nhấn đất di chuyển</p>
-            <p><strong>Câu hỏi: </strong>Khi mặc nhiều bộ phận Ánh Sao, thời gian chuyển màu từ bộ màu nhuộm này đến bộ tiếp theo của mỗi bộ phần có bắt buộc phải nhất quán không?<br><strong>Đáp án: </strong>Có thể tự do cài đặt.</p>
-            <p><strong>Câu hỏi: </strong>Khi nấu ăn trong Nhà hiển thị không báo không thể đến tủ bếp thì phải làm sao?<br><strong>Đáp án: </strong>Thay đổi bố cục tủ bếp</p>
-            <p><strong>Câu hỏi: </strong>Khi nhận nuôi/mua pet, có thể tùy chỉnh những bộ phận nào của pet?<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Khi nhuộm màu thời trang, cần vật phẩm gì để mở 8 bảng phối màu đầu?<br><strong>Đáp án: </strong>Thẻ màu xu hướng</p>
-            <p><strong>Câu hỏi: </strong>Khi nhuộm thời trang, 8 bảng màu đầu tiên có cần dùng Cột Hướng Gió để mở rộng không<br><strong>Đáp án: </strong>Không Cần</p>
-            <p><strong>Câu hỏi: </strong>Khi pet sinh sản, trong gia đình cần có mấy ô trống<br><strong>Đáp án: </strong>2 chiếc</p>
-            <p><strong>Câu hỏi: </strong>Khi thời trang thiết kế độc quyền chưa tải lên xong, có thể thực hiện thao tác gì?<br><strong>Đáp án: </strong>Mặc thử</p>
-            <p><strong>Câu hỏi: </strong>Khi thời trang thiết kế độc quyền chưa tải lên xong, có thể thực hiện thao tác nào?<br><strong>Đáp án: </strong>Mặc thử</p>
-            <p><strong>Câu hỏi: </strong>Không thể chat trong kênh nào sau đây?<br><strong>Đáp án: </strong>Kênh hệ thống</p>
-            <p><strong>Câu hỏi: </strong>Làm cách nào để cho Pet ăn<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Làm cách nào để mời Pet khác cùng chơi<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Làm cách nào để nhận vật phẩm mở khóa Sao Neon, để mở khóa bảng X của thời trang 4~6 sao?<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Làm cách nào để nhận vật phẩm mở khóa Sao X, để mở khóa Bảng X của thời trang 3 sao?<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Làm cách nào để tăng độ quyến rũ của thời trang<br><strong>Đáp án: </strong>Mở khóa bảng phối màu bộ thời trang</p>
-            <p><strong>Câu hỏi: </strong>Làm thế nào để học công thức nấu ăn nhận từ nâng cấp chứng chỉ nấu nướng?<br><strong>Đáp án: </strong>Xem các chương trình trên VVTV</p>
-            <p><strong>Câu hỏi: </strong>Làm thế nào để nhận 8 điểm Thể Lực trong Nhà mỗi ngày?<br><strong>Đáp án: </strong>Nghỉ trên giường</p>
-            <p><strong>Câu hỏi: </strong>Làm thế nào để thay đổi hình ảnh khuôn mặt<br><strong>Đáp án: </strong>Nặn mặt lại tại phòng thiết kế</p>
-            <p><strong>Câu hỏi: </strong>Làm thế nào để xem ghi chú kết hợp mình tải lên?<br><strong>Đáp án: </strong>Ghi chú kết hợp tại phòng thiết kế</p>
-            <p><strong>Câu hỏi: </strong>Lợi ích của Spa cho thú cưng là:<br><strong>Đáp án: </strong>Tốc độ giảm Độ Sạch chậm lại.</p>
-            <p><strong>Câu hỏi: </strong>Lợi ích của việc cho Pet ăn Thức Ăn Bổ Dưỡng là:<br><strong>Đáp án: </strong>Tốc độ giảm Độ No sẽ chậm lại</p>
-            <p><strong>Câu hỏi: </strong>Mặc kết hợp Nhật Ký sẽ có thể chọn điều chỉnh màu nhuộm thời trang để tải lên?<br><strong>Đáp án: </strong>Có thể</p>
-            <p><strong>Câu hỏi: </strong>Mèo đen sẽ xuất hiện ở đâu trong nhà<br><strong>Đáp án: </strong>Xung quanh khu xây dựng</p>
-            <p><strong>Câu hỏi: </strong>Mỗi ngày tối đa được hoàn thành bao nhiêu sự kiện ngày?<br><strong>Đáp án: </strong>12</p>
-            <p><strong>Câu hỏi: </strong>Mở khóa 8 bảng màu đầu của thời trang xong, sẽ nhận được thêm mấy bảng màu?<br><strong>Đáp án: </strong>2</p>
-            <p><strong>Câu hỏi: </strong>Mở khóa Bảng X của thời trang có tác dụng gì<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Mục nào sau đây có thể nhận Đồng Hành mới<br><strong>Đáp án: </strong>SK Tỏa Sáng</p>
-            <p><strong>Câu hỏi: </strong>Mục nào sau đây không thể nhận thời trang mới?<br><strong>Đáp án: </strong>Đòi bạn bè</p>
-            <p><strong>Câu hỏi: </strong>Nếu không thể di chuyển trong Nhà, thì phải làm sao<br><strong>Đáp án: </strong>Nhấn Thoát lag</p>
-            <p><strong>Câu hỏi: </strong>Nghề nghiệp của Ashley là gì?<br><strong>Đáp án: </strong>Thám tử tư</p>
-            <p><strong>Câu hỏi: </strong>Nghề nghiệp của Samuel là<br><strong>Đáp án: </strong>Học giả pháp luật</p>
-            <p><strong>Câu hỏi: </strong>Ngoại hình nào dưới đây, có thể nhận bằng cách nhân giống.<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Nhận Đồng Hành trùng lặp có lợi ích gì?<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Nhận thời trang trùng lặp có thể làm gì?<br><strong>Đáp án: </strong>Tách tại Đài Tách</p>
-            <p><strong>Câu hỏi: </strong>Nhuộm bộ có tác dụng gì?<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Nhuộm màu thời trang tối đa được nhuộm mấy khu vực?<br><strong>Đáp án: </strong>12</p>
-            <p><strong>Câu hỏi: </strong>Ở giai đoạn phát triển nào của Pet có thể nhân giống<br><strong>Đáp án: </strong>Tr.Thành</p>
-            <p><strong>Câu hỏi: </strong>Pet được mua/nhận nuôi, sau khi chọn xong, có thể tạo hình lại không?<br><strong>Đáp án: </strong>Không</p>
-            <p><strong>Câu hỏi: </strong>Pet không thể nhân giống trong tình huống nào<br><strong>Đáp án: </strong>Tất cả tình huống trên đều không được</p>
-            <p><strong>Câu hỏi: </strong>Pet nào dưới đây có thể nhận nuôi miễn phí<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Pet nhận bằng cách mua/nhận nuôi, mặc định ở giai đoạn phát triển nào?<br><strong>Đáp án: </strong>Thành niên</p>
-            <p><strong>Câu hỏi: </strong>Pet trong gửi chăm, sẽ có trạng thái nào không thay đổi<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Quyến rũ đạt 8 hoặc 16 điểm có tác dụng gì<br><strong>Đáp án: </strong>Tăng phong cách thời trang trang phục</p>
-            <p><strong>Câu hỏi: </strong>Sao Neon có thể mở khóa Bảng X cho thời trang mấy sao?<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Sau khi điều chỉnh vị trí nội thất có thể tương tác, khi nhấp vào nội thất sẽ hiển thị "không thể tương tác vị trí này", làm cách nào để giải quyết?<br><strong>Đáp án: </strong>Quan sát dấu chân vị trí tương tác của nội thất và điều chỉnh lại vị trí.</p>
-            <p><strong>Câu hỏi: </strong>So với nặn căn bản, nặn nâng cao được điều chỉnh thêm những kích thước nào.<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Tên của ma-nơ-canh mà Daisy luôn mang bên mình là gì?<br><strong>Đáp án: </strong>Betty</p>
-            <p><strong>Câu hỏi: </strong>Thao tác nào dưới đây không được thực hiện trong chế độ xây dựng nâng cao<br><strong>Đáp án: </strong>Đặt nội thất bên ngoài khu vực xây dựng</p>
-            <p><strong>Câu hỏi: </strong>Thời trang bộ có thể dùng Thẻ Màu Xu Hướng để mở bảng phối màu không?<br><strong>Đáp án: </strong>Có thể</p>
-            <p><strong>Câu hỏi: </strong>Thời trang có mấy bộ màu xem trước?<br><strong>Đáp án: </strong>3</p>
-            <p><strong>Câu hỏi: </strong>Thời trang thiết kế độc quyền tống có bao nhiêu lớp ảnh có thể vẽ?<br><strong>Đáp án: </strong>2 chiếc</p>
-            <p><strong>Câu hỏi: </strong>Thứ mà Mèo đen trong Pet Phiêu Lưu thích nhất là<br><strong>Đáp án: </strong>Nước thịt đóng hộp</p>
-            <p><strong>Câu hỏi: </strong>thử thách Giai Đoạn Tình Ý cần tiêu hao gì?<br><strong>Đáp án: </strong>Lượt</p>
-            <p><strong>Câu hỏi: </strong>Tình huống nào dưới đây sẽ không xảy ra khi pet nhân giống<br><strong>Đáp án: </strong>Mèo anh lông ngắn màu trắng và đen sinh ra mèo tam thể</p>
-            <p><strong>Câu hỏi: </strong>Tính năng sử dụng gần đây nhất của Bảng X, tối đa có thể lưu bao nhiêu loại màu khác nhau?<br><strong>Đáp án: </strong>6 Loại</p>
-            <p><strong>Câu hỏi: </strong>Tối đa có bao nhiêu Pet có thể đi theo bạn đến Nhà hoặc Cộng Đồng khác.<br><strong>Đáp án: </strong>2</p>
-            <p><strong>Câu hỏi: </strong>Tổng có bao nhiêu kích thước dữ liệu trong Nặn Nâng Cao<br><strong>Đáp án: </strong>186</p>
-            <p><strong>Câu hỏi: </strong>Trang sức tóc tối đa có bao nhiêu bộ phận?<br><strong>Đáp án: </strong>10</p>
-            <p><strong>Câu hỏi: </strong>Trong ải sự kiện Nữ Hoàng Đại Diện, điểm đại diện chỉ tính điểm cao nhất của mấy món trang sức?<br><strong>Đáp án: </strong>5</p>
-            <p><strong>Câu hỏi: </strong>Trong cơ chế Ánh Sao X, dùng tính năng "khóa vị trí màu nhuộm", có thể giúp?<br><strong>Đáp án: </strong>Sửa phương án tương tự cho cả bộ thời trang</p>
-            <p><strong>Câu hỏi: </strong>Trong cơ chế Ánh Sao X, mỗi bộ thời trang ngoài nhuộm màu cơ bản, tối đa còn có thể cài đặt bao nhiêu phương án nhuộm?<br><strong>Đáp án: </strong>9</p>
-            <p><strong>Câu hỏi: </strong>Trong cuộc thi Nữ Hoàng Đại Diện, làm thế nào để đại diện nhiều cửa hàng hơn?<br><strong>Đáp án: </strong>Tất cả mục trên</p>
-            <p><strong>Câu hỏi: </strong>Trong hệ thống nhà trên điện thoại, cần chỉnh đèn thành loại nào sau đây, để có thể chiếu sáng những vật khác<br><strong>Đáp án: </strong>Đèn</p>
-            <p><strong>Câu hỏi: </strong>Trong nặn nâng cao, bộ phận Má có tổng bao nhiêu kích thước có thể điều chỉnh.<br><strong>Đáp án: </strong>7</p>
-            <p><strong>Câu hỏi: </strong>Trong nặn nâng cao, bộ phận nào có thể điều chỉnh<br><strong>Đáp án: </strong>Tất cả</p>
-            <p><strong>Câu hỏi: </strong>Trong nặn nâng cao, có thể điều chỉnh kích thước nào của Trán.<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Trong Nhà nhân vật đi không nhanh, thỉnh thoảng thực hiện động tác đói thì phải?<br><strong>Đáp án: </strong>Đi ăn</p>
-            <p><strong>Câu hỏi: </strong>Trong nhà, cách để tìm pet nhanh nhất là:<br><strong>Đáp án: </strong>Tất cả</p>
-            <p><strong>Câu hỏi: </strong>Trong nhà, nhấp vào Avatar có thể tiến hành những thao tác nào:<br><strong>Đáp án: </strong>Tất cả</p>
-            <p><strong>Câu hỏi: </strong>Trong những tính năng dưới đây, có thể cài đặt chế độ "Nhìn Máy Quay" là<br><strong>Đáp án: </strong>Tất cả mục trên</p>
-            <p><strong>Câu hỏi: </strong>Trong Thi Đấu Thời Trang sẽ nhận được thưởng gì?<br><strong>Đáp án: </strong>Tất cả đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Tư thế đứng sau khi thay đổi sẽ được lưu vào đâu?<br><strong>Đáp án: </strong>Bộ tùy chỉnh</p>
-            <p><strong>Câu hỏi: </strong>Vật phẩm nào dùng để mở rộng bảng màu?<br><strong>Đáp án: </strong>Cột Hướng Gió</p>
-            <p><strong>Câu hỏi: </strong>Vật phẩm nào dưới đây nằm trong danh sách có nhiều lựa chọn.<br><strong>Đáp án: </strong>Nội thất như bàn, tủ, giường, ghế</p>
-            <p><strong>Câu hỏi: </strong>Về Tỏa Sáng<br><strong>Đáp án: </strong>Các ý trên đều đúng</p>
-            <p><strong>Câu hỏi: </strong>Xung quanh nhân vật khi trong Nhà xuất hiện sương mù xanh thì phải làm sao?<br><strong>Đáp án: </strong>Đi tắm</p>
-        </div>
+    <!-- giữ nguyên <head> và navbar như bạn đã có -->
+<div class="main-container qna">
+    <h1>Bách khoa Vvanna</h1>
+    <input type="text" id="searchBar" placeholder="Tìm kiếm...">
+    <div class="question" id="questionsContainer">
+        <!-- dữ liệu từ Google Sheet sẽ load vào đây -->
     </div>
+</div>
+
+<!-- thêm PapaParse từ CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
+
+let entries = [];
+
+// Load dữ liệu từ CSV
+async function loadData() {
+    const res = await fetch(csvUrl + "?t=" + Date.now()); // tránh cache
+    const csvText = await res.text();
+    const parsed = Papa.parse(csvText, {header: true, skipEmptyLines: true});
+    entries = parsed.data.map(row => ({title: row['title'], content: row['content']}));
+    render(entries);
+}
+
+// Render danh sách câu hỏi
+function render(list) {
+    const container = document.getElementById("questionsContainer");
+    const noResult = document.getElementById("noResult");
+    container.innerHTML = "";
+    if(list.length === 0){
+        if(!noResult){
+            const div = document.createElement("div");
+            div.id = "noResult";
+            div.className = "no-result";
+            div.textContent = "Không tìm thấy nội dung phù hợp...";
+            container.parentNode.appendChild(div);
+        } else {
+            noResult.style.display = "block";
+        }
+        return;
+    }
+    if(document.getElementById("noResult")) document.getElementById("noResult").style.display = "none";
+
+    list.forEach(e => {
+        const p = document.createElement("p");
+        p.innerHTML = `<strong>Câu hỏi: </strong>${e.title}<br><strong>Đáp án: </strong>${e.content}`;
+        container.appendChild(p);
+    });
+}
+
+// Tìm kiếm
+document.getElementById("searchBar").addEventListener("input", () => {
+    const kw = document.getElementById("searchBar").value.toLowerCase();
+    const filtered = entries.filter(e => 
+        e.title.toLowerCase().includes(kw) || e.content.toLowerCase().includes(kw)
+    );
+    render(filtered);
+});
+
+// Load dữ liệu lần đầu
+loadData();
+
+// Cập nhật mỗi 1 giây
+setInterval(loadData, 1000);
+</script>
+
 <footer class="footer">
     <div class="version">
         <a href="#" target="_blank" aria-label="SGMY"><img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/465401902_594285636278445_5173138900862067601_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=teFXG7HUvVwQ7kNvgFC-eqV&_nc_zt=23&_nc_ht=scontent.fhan14-3.fna&_nc_gid=AumxE3Bj7HW8yICHPzvCCc5&oh=00_AYCG_ILDzM_25opfuMKsFa_0EFynm4bkRZiUH6seTsWJPQ&oe=672BF43D" alt="SGMY"></a>
@@ -184,3 +134,4 @@
     <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
 </body>
 </html>
+
