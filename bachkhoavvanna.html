@@ -74,20 +74,7 @@
 <!-- Nút scroll -->
 <button id="scrollTopBtn" class="scroll-btn" title="Lên đầu trang">↑</button>
 <button id="scrollBottomBtn" class="scroll-btn" title="Xuống cuối trang">↓</button>
-<script>
-    const qnaContainer = document.getElementById("qnaContainer");
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-scrollTopBtn.addEventListener("click", () => {
-    qnaContainer.scrollTo({ top: 0, behavior: "smooth" });
-});
-
-scrollBottomBtn.addEventListener("click", () => {
-    qnaContainer.scrollTo({ top: qnaContainer.scrollHeight, behavior: "smooth" });
-});
-
-</script>
 
 <script>
 const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS7HOXwDgQimfgHMvIKOVgSGalxrC361rsoegLJXBW6IyIXdoKgifQGibDm9vcJEH2CMel5vs38OVN_/pub?output=csv";
@@ -159,8 +146,25 @@ setInterval(fetchCSV, 1000);
 
 <script src="https://inforgamepage.github.io/lifemakeover/vetrangchu.js"></script>
 <script src="https://inforgamepage.github.io/lifemakeover/script.js"></script>
+
+<script>
+    const qnaContainer = document.getElementById("qnaContainer");
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+
+scrollTopBtn.addEventListener("click", () => {
+    qnaContainer.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+scrollBottomBtn.addEventListener("click", () => {
+    qnaContainer.scrollTo({ top: qnaContainer.scrollHeight, behavior: "smooth" });
+});
+
+</script>
+
 </body>
 </html>
+
 
 
 
