@@ -185,3 +185,16 @@ playPauseBtn.addEventListener("click",
 // Khởi tạo tip đầu tiên và bắt đầu tự động
 showTip(currentTipIndex);
 startAutoPlay();
+
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+
+// Cuộn lên đầu trang
+scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Cuộn xuống cuối trang
+scrollBottomBtn.addEventListener("click", () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+});
