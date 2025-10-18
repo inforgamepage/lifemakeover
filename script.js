@@ -186,15 +186,40 @@ playPauseBtn.addEventListener("click",
 showTip(currentTipIndex);
 startAutoPlay();
 
+// Kiểm tra nếu nút scroll tồn tại trên trang mới gán sự kiện
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-// Cuộn lên đầu trang
-scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-});
+if (scrollTopBtn && scrollBottomBtn) {
+    // Cuộn lên đầu trang
+    scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
-// Cuộn xuống cuối trang
-scrollBottomBtn.addEventListener("click", () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-});
+    // Cuộn xuống cuối trang
+    scrollBottomBtn.addEventListener("click", () => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    });
+
+    // Ẩn/hiện nút khi cuộn
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        if (scrollY > 100) {
+            scrollTopBtn.style.display = "flex";
+        } else {
+            scrollTopBtn.style.display = "none";
+        }
+
+        if (scrollY + window.innerHeight < document.body.scrollHeight - 100) {
+            scrollBottomBtn.style.display = "flex";
+        } else {
+            scrollBottomBtn.style.display = "none";
+        }
+    });
+
+    // Ẩn ngay khi trang load
+    scrollTopBtn.style.display = "none";
+    scrollBottomBtn.style.display = "flex";
+}
+
+
