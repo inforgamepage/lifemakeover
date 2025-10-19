@@ -432,25 +432,28 @@ body.dark-mode input[type="text"]:focus {
 
 #challengeContainer {
   display: flex;
-  flex-wrap: wrap;       /* Cho phép xuống dòng khi hẹp */
-  gap: 10px;             /* Khoảng cách giữa các hộp */
+  flex-wrap: wrap;
+  justify-content: center; /* Căn giữa */
+  gap: 12px;
   margin-top: 20px;
 }
 
 .challenge-box {
-  width: 60px;
+  width: 80px;
   height: 60px;
-  background-color: #f0f0f0;
-  border-radius: 12px;   /* Bo góc tròn */
+  background-color: #f5f5f5;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  color: #333;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .challenge-box:hover {
-  transform: scale(1.1); /* Phóng to nhẹ khi hover */
+  transform: scale(1.1);
   background-color: #e0e0e0;
 }
