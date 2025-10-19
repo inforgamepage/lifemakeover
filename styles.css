@@ -433,8 +433,13 @@ body.dark-mode input[type="text"]:focus {
 .challenge-box {
   width: 80px;
   height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .challenge-box:hover {
@@ -444,13 +449,4 @@ body.dark-mode input[type="text"]:focus {
 
 .dark-mode .challenge-box:hover {
   background-color: #3a3a3a;
-}
-
-#challengeContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 20px;
-  margin-bottom: 40px; /* 👈 Khoảng cách cố định với footer */
 }
