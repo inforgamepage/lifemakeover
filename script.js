@@ -126,6 +126,16 @@ const tips = [
  "Đồ lấy từ trong tủ lạnh ra mà không nấu chỉ để được tối đa 5 ngày theo thời gian thực"
 ];
 
+const vvannaChallengeTips = [
+  "Mục tiêu phối nhiều bộ, không được mặc trùng lặp.",
+  "Có thể vượt ải nhiều lần để hoàn thành dần từng mục tiêu.",
+  "Những đồ mặc để vượt ải (trừ tóc) phải nhuộm đúng theo mục tiêu đặt ra và nhuộm tối thiểu một khu đúng theo màu yêu cầu.",
+  "Khi chọn màu phải bấm lưu, bấm đúng màu mà không lưu thì mục tiêu màu sắc sẽ không được tính.".
+  "Về yêu cầu nhãn thì thường phải dùng ít nhất 3 món đúng nhãn mới được tính",
+  "Có 2 nhãn Đồng Phục, đừng tìm nhầm",
+  "Nếu không có sẵn đồ đúng nhãn thì vào bộ sưu tập tìm kiếm theo bộ lọc, xem cách nhận, chịu khó dò tìm đồ dễ lấy nhất.",
+];
+
 let currentTipIndex = 0;
 let intervalId;
 const tipsContent = document
@@ -186,6 +196,22 @@ playPauseBtn.addEventListener("click",
 showTip(currentTipIndex);
 startAutoPlay();
 
+//kiểm tra nếu tồn tại #tipsvcContent thì gán tips từ mảng này
+if (document.getElementById("tipsvcContent")) {
+  let currentTip = 0;
+  const tips = vvannaChallengeTips; // dùng tips riêng cho trang này
+  const tipsvcContent = document.getElementById("tipsvcContent");
+  const tipCounter = document.getElementById("tipCounter");
+
+  function showTip(index) {
+    tipsvcContent.textContent = tips[index];
+    tipCounter.textContent = `${index+1}/${tips.length}`;
+  }
+
+  // gắn sự kiện cho prevBtn, nextBtn, playPauseBtn như ở Trang chủ
+  showTip(currentTip);
+}
+
 //Nút cuộn nhanh
 window.addEventListener("DOMContentLoaded", () => {
     const scrollTopBtn = document.getElementById("scrollTopBtn");
@@ -201,5 +227,6 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 
 
