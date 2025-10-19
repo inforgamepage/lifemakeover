@@ -118,13 +118,13 @@ search.addEventListener("keypress", e => {
     if(e.key === "Enter") filterSearch();
 });
 
+// Hàm fetch CSV trả về Promise
 async function fetchCSV(){
     try{
         const response = await fetch(csvUrl);
         const text = await response.text();
         const rows = text.split("\n").slice(1); // bỏ header
         const newEntries = rows.map(r=>{
-            // Dùng split CSV thông minh để giữ nguyên dữ liệu xuống dòng trong cùng 1 ô
             const match = r.match(/^(?:"((?:[^"]|"")*)"|([^,]*)),(?:"((?:[^"]|"")*)"|([^,]*))/);
             if(!match) return null;
             const question = (match[1] || match[2] || "").replace(/""/g,'"').trim();
@@ -134,14 +134,36 @@ async function fetchCSV(){
 
         entries = newEntries;
         if(!searching) render(entries);
+
+        return true; // báo hiệu đã xong
     }catch(err){
         console.error("Lỗi fetch CSV:", err);
+        return false;
     }
 }
 
-// Lần đầu fetch và fetch lại mỗi giây
-fetchCSV();
-setInterval(fetchCSV, 1000);
+// Hàm gắn sự kiện cho nút cuộn
+function enableScrollButtons(){
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+
+    if(scrollTopBtn && scrollBottomBtn){
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        scrollBottomBtn.addEventListener("click", () => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        });
+    }
+}
+
+// Khởi tạo: chờ CSV load xong rồi mới gắn nút cuộn
+fetchCSV().then(() => {
+    enableScrollButtons();
+});
+
+// Nếu muốn cập nhật dữ liệu liên tục, có thể fetch lại định kỳ
+setInterval(fetchCSV, 10000); // 10 giây 1 lần (không nên để 1 giây vì tốn tài nguyên)
 </script>
 
 <script src="https://inforgamepage.github.io/lifemakeover/vetrangchu.js"></script>
@@ -149,3 +171,4 @@ setInterval(fetchCSV, 1000);
 
 </body>
 </html>
+
