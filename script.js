@@ -226,6 +226,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const boxes = document.querySelectorAll(".challenge-box");
   const noResult = document.getElementById("no-result");
 
+  // Tìm kiếm
   if (searchBar && boxes.length > 0) {
     searchBar.addEventListener("input", () => {
       const query = searchBar.value.toLowerCase().trim();
@@ -246,7 +247,14 @@ window.addEventListener("DOMContentLoaded", () => {
       noResult.style.display = found ? "none" : "block";
     });
   }
+
+  // Xử lý click để chuyển link
+  boxes.forEach(box => {
+    const link = box.getAttribute("data-link");
+    if (link) {
+      box.addEventListener("click", () => {
+        window.location.href = link;
+      });
+    }
+  });
 });
-
-
-
