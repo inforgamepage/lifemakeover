@@ -445,3 +445,12 @@ body.dark-mode input[type="text"]:focus {
 .dark-mode .challenge-box:hover {
   background-color: #3a3a3a;
 }
+
+#challengeContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 40px; /* 👈 Khoảng cách cố định với footer */
+}
