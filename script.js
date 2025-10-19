@@ -187,16 +187,19 @@ showTip(currentTipIndex);
 startAutoPlay();
 
 //Nút cuộn nhanh
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+window.addEventListener("DOMContentLoaded", () => {
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    const scrollBottomBtn = document.getElementById("scrollBottomBtn");
 
-// Cuộn lên đầu trang
-scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (scrollTopBtn && scrollBottomBtn) {
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        scrollBottomBtn.addEventListener("click", () => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        });
+    }
 });
 
-// Cuộn xuống cuối trang
-scrollBottomBtn.addEventListener("click", () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-});
 
