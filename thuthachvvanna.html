@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://inforgamepage.github.io/lifemakeover/styles.css">
+    <title>Bách khoa Vvanna</title>
+</head>
+<body class="body-elements">
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropdown-btn homepage-icon" id="homepage">Trang chủ</button>   
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-btn infor-icon" onclick="toggleDropdown('inforDropdown')">Thông tin</button>
+            <div id="inforDropdown" class="dropdown-content">
+                <a href="#">Cốt truyện</a>
+                <a href="#">Lầu quay</a>
+                <a href="#">Sự kiện</a>
+                <a href="#">Mật khẩu thời trang</a>
+                <a href="#">Đồng hành</a>
+                <a href="#">Chụp ảnh</a>
+                <a href="#">Thời trang</a>
+            </div>
+        </div>
+        <div class="dropdown"> 
+            <button class="dropdown-btn guilde-icon" onclick="toggleDropdown('guildeDropdown')">Hướng dẫn chơi</button>
+            <div id="guildeDropdown" class="dropdown-content">
+                <a href="https://inforgamepage.github.io/lifemakeover/bachkhoavvanna.html">Bách khoa Vvanna</a>
+                <a href="#">Thử thách Vvanna</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropdown-btn globe-icon" onclick="toggleDropdown('languageDropdown')">Ngôn ngữ</button>
+            <div id="languageDropdown" class="dropdown-content">
+                <a href="quizen.html">English</a>
+                <a href="quizindo.html">Bahasa</a>
+                <a href="quizth.html">ภาษาไทย</a>
+                <a href="quizru.html">Pусский язык</a>
+                <a href="https://inforgamepage.github.io/lifemakeover/bachkhoavvanna.html">Tiếng Việt</a>
+                <a href="quizcn.html">中文</a>
+                <a href="quizkr.html">한글</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button id="themeToggleBtn" class="dropdown-btn theme-icon" onclick="toggleTheme()" ontouchstart="toggleTheme()">Sáng</button>
+        </div>
+    </div>
+
+  <div class="main-container qna">
+    <h1>Thử thách Vvanna</h1>
+    <div id="generalInfo" class="tips-container"></div>
+    <input type="text" id="searchBar" placeholder="Tìm kiếm thử thách...">
+    <div id="challengeContainer"></div>
+    <div id="no-result" style="display:none;">Không tìm thấy kết quả phù hợp</div>
+  </div>
+
+  <!-- Nút cuộn -->
+  <button id="scrollTopBtn" class="scroll-btn" title="Lên đầu trang">↑</button>
+  <button id="scrollBottomBtn" class="scroll-btn" title="Xuống cuối trang">↓</button>
+
+  <script>
+  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkZ9OtKo78tLYH9XAxPtZcfoJFyT08_JVgm3APKipcijBBRf9yaWNnnMtoM1kT1ZAKy8vQP03SQjRI/pub?output=csv";
+  let allChallenges = [];
+  let searching = false;
+
+  const generalInfoDiv = document.getElementById("generalInfo");
+  const container = document.getElementById("challengeContainer");
+  const search = document.getElementById("searchBar");
+  const noResult = document.getElementById("no-result");
+
+  function render(list){
+    container.innerHTML = "";
+    if(list.length === 0){
+      noResult.style.display = "block";
+      return;
+    }
+    noResult.style.display = "none";
+    list.forEach(item=>{
+      const div = document.createElement("div");
+      div.innerHTML = `<strong>${item.group}</strong> - ${item.stage}: ${item.requirement}`;
+      container.appendChild(div);
+    });
+  }
+
+  function filterSearch(){
+    const kw = search.value.trim().toLowerCase();
+    searching = kw.length > 0;
+    if(!searching){
+      render(allChallenges);
+      return;
+    }
+    const filtered = allChallenges.filter(item =>
+      item.group.toLowerCase().includes(kw) ||
+      item.stage.toLowerCase().includes(kw) ||
+      item.requirement.toLowerCase().includes(kw)
+    );
+    render(filtered);
+  }
+
+  search.addEventListener("input", filterSearch);
+
+  async function fetchCSV(){
+    const res = await fetch(csvUrl);
+    const text = await res.text();
+    const rows = text.split("\n").map(r => r.split(","));
+
+    // Hàng 1–4: thông tin chung
+    const generalInfo = rows.slice(0,4).map(r => r[0]).join("<br>");
+    generalInfoDiv.innerHTML = generalInfo;
+
+    // Hàng 5 trở đi: nhóm + dữ liệu
+    let currentGroup = "";
+    allChallenges = [];
+    rows.slice(4).forEach(r => {
+      if(r.length === 1 || (r[1]==="" && r[0])) {
+        currentGroup = r[0].trim(); // ví dụ "Ải 1"
+      } else {
+        allChallenges.push({
+          group: currentGroup,
+          stage: r[0] || "",
+          requirement: r[1] || ""
+        });
+      }
+    });
+
+    if(!searching) render(allChallenges);
+  }
+
+  fetchCSV();
+  </script>
+
+  <!-- Script chung -->
+  <script src="vetrangchu.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
