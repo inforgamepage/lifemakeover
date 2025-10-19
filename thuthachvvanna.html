@@ -33,13 +33,13 @@
         <div class="dropdown">
             <button class="dropdown-btn globe-icon" onclick="toggleDropdown('languageDropdown')">Ngôn ngữ</button>
             <div id="languageDropdown" class="dropdown-content">
-                <a href="quizen.html">English</a>
-                <a href="quizindo.html">Bahasa</a>
-                <a href="quizth.html">ภาษาไทย</a>
-                <a href="quizru.html">Pусский язык</a>
-                <a href="https://inforgamepage.github.io/lifemakeover/bachkhoavvanna.html">Tiếng Việt</a>
-                <a href="quizcn.html">中文</a>
-                <a href="quizkr.html">한글</a>
+                <a href="vvannachallenge.html">English</a>
+                <a href="vvannachallengeindo.html">Bahasa</a>
+                <a href="vvannachallengeth.html">ภาษาไทย</a>
+                <a href="vvannachallengeru.html">Pусский язык</a>
+                <a href="https://inforgamepage.github.io/lifemakeover/thuthachvvanna.html">Tiếng Việt</a>
+                <a href="vvannachallengecn.html">中文</a>
+                <a href="vvannachallengekr.html">한글</a>
             </div>
         </div>
         <div class="dropdown">
@@ -47,91 +47,47 @@
         </div>
     </div>
 
-  <div class="main-container qna">
-    <h1>Thử thách Vvanna</h1>
-    <div id="generalInfo" class="tips-container"></div>
-    <input type="text" id="searchBar" placeholder="Tìm kiếm thử thách...">
-    <div id="challengeContainer"></div>
-    <div id="no-result" style="display:none;">Không tìm thấy kết quả phù hợp</div>
-  </div>
-
-  <!-- Nút cuộn -->
-  <button id="scrollTopBtn" class="scroll-btn" title="Lên đầu trang">↑</button>
-  <button id="scrollBottomBtn" class="scroll-btn" title="Xuống cuối trang">↓</button>
-
-  <script>
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQkZ9OtKo78tLYH9XAxPtZcfoJFyT08_JVgm3APKipcijBBRf9yaWNnnMtoM1kT1ZAKy8vQP03SQjRI/pub?output=csv";
-  let allChallenges = [];
-  let searching = false;
-
-  const generalInfoDiv = document.getElementById("generalInfo");
-  const container = document.getElementById("challengeContainer");
-  const search = document.getElementById("searchBar");
-  const noResult = document.getElementById("no-result");
-
-  function render(list){
-    container.innerHTML = "";
-    if(list.length === 0){
-      noResult.style.display = "block";
-      return;
-    }
-    noResult.style.display = "none";
-    list.forEach(item=>{
-      const div = document.createElement("div");
-      div.innerHTML = `<strong>${item.group}</strong> - ${item.stage}: ${item.requirement}`;
-      container.appendChild(div);
-    });
-  }
-
-  function filterSearch(){
-    const kw = search.value.trim().toLowerCase();
-    searching = kw.length > 0;
-    if(!searching){
-      render(allChallenges);
-      return;
-    }
-    const filtered = allChallenges.filter(item =>
-      item.group.toLowerCase().includes(kw) ||
-      item.stage.toLowerCase().includes(kw) ||
-      item.requirement.toLowerCase().includes(kw)
-    );
-    render(filtered);
-  }
-
-  search.addEventListener("input", filterSearch);
-
-  async function fetchCSV(){
-    const res = await fetch(csvUrl);
-    const text = await res.text();
-    const rows = text.split("\n").map(r => r.split(","));
-
-    // Hàng 1–4: thông tin chung
-    const generalInfo = rows.slice(0,4).map(r => r[0]).join("<br>");
-    generalInfoDiv.innerHTML = generalInfo;
-
-    // Hàng 5 trở đi: nhóm + dữ liệu
-    let currentGroup = "";
-    allChallenges = [];
-    rows.slice(4).forEach(r => {
-      if(r.length === 1 || (r[1]==="" && r[0])) {
-        currentGroup = r[0].trim(); // ví dụ "Ải 1"
-      } else {
-        allChallenges.push({
-          group: currentGroup,
-          stage: r[0] || "",
-          requirement: r[1] || ""
-        });
-      }
-    });
-
-    if(!searching) render(allChallenges);
-  }
-
-  fetchCSV();
-  </script>
+<div class="main-container tipsvc">
+        <h1>Thử thách Vvanna</h1>
+        <div class="tipsvc-container">
+            <div class="tipsvc-content" id="tipsvcContent">Mục tiêu phối nhiều bộ chú ý không được mặc trùng lặp.</div>
+            <div class="buttons">
+                <button id="prevBtn"><</button>
+                <button id="playPauseBtn">❚❚</button>
+                <button id="nextBtn">></button>
+            </div>
+            <div  class="tipsvc-counter">
+                <div data-translate="tipsvcText">Vài lưu ý nhỏ</div>
+                <div id="tipCounter">1/7</div>
+            </div>
+        </div>
+        </div>
+<footer class="footer">
+    <div class="version">
+        <a href="https://lifemakeovermysg.archosaur.com/index_main.html" target="_blank" aria-label="SGMY"><img src="https://play-lh.googleusercontent.com/JDQ0UOe9ClAbObhio8_fSI_c7pZXFzII_BW2nmK9haIAIjHx2PlQk6nILfS652uNKA=w480-h960-rw" alt="SGMY" title="Singapore và Malaysia"></a>
+        <a href="https://kirapara.archosaur.com/" target="_blank" aria-label="JP"><img src="https://play-lh.googleusercontent.com/5JfaP0eeOjFXWhEDgHnPr1FIasmDux92zmFlmJQK4wVxZXyKnqS_G_YmaTvwtC7ofQ=s96-rw" alt="JP" title="Nhật Bản"></a>
+        <a href="https://mystyle.archosaur.com/home/index.html" target="_blank" aria-label="CN"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f5/8e/27/f58e27d3-4932-ab75-a7d1-36cd1846fad4/AppIcon-1x_U007emarketing-0-8-0-0-85-220-0.png/434x0w.webp" alt="CN" title="Trung Quốc"></a>
+        <a href="https://lifemakeover.archosaur.com/" target="_blank" aria-label="Global"><img src="https://play-lh.googleusercontent.com/aE2tu6k6f4JGjeSb8miztpzoJEoZLkG9XczqxIv4Hkp859MBrsFt5ZOLIWG6Utky4xA=s96-rw" alt="Global" title="Quốc tế"></a>
+        <a href="https://lifemakeover.archosaur.com/index_vn.html" target="_blank" aria-label="VN"><img src="https://play-lh.googleusercontent.com/TUA-LHwdqJcwVtO5AQIZOTQ-keYiDuGs2goprebePIWtDaxuAJWzYPZEtBBe8SJARYE=s96-rw" alt="VN" title="Quốc tế (vùng Việt Nam)"></a>
+        <a href="https://stylight.nex2fun.com/" target="_blank" aria-label="KR"><img src="https://play-lh.googleusercontent.com/d76GrkcaT-nKISQQmbC-QKP9XPov31qAHbqL_zfBMzPJlSoLnSHmavcQbIyhsDeSBUCvTI9JnPhLHOFYqVMR94Q=s96-rw" alt="KR" title="Hàn Quốc"></a>
+    </div>
+    <div class="info">
+        <p>Chơi quá 180 phút một ngày sẽ ảnh hưởng xấu đến sức khỏe.
+        <br>
+    <br>
+        Trò chơi điện tử "Life Makeover" là trò chơi dành cho người lớn (từ 18 tuổi trở lên).
+        <br>
+    <br>
+        Mọi thông tin được tổng hợp dựa trên nội dung từ trò chơi "Life Makeover" của Archosaur Games và thuộc sở hữu của Archosaur Games.</p>
+    </div>
+</footer>
+    <!-- Nút cuộn nhanh -->
+<button id="scrollTopBtn" class="scroll-btn" title="Lên đầu trang">↑</button>
+<button id="scrollBottomBtn" class="scroll-btn" title="Xuống cuối trang">↓</button>
 
   <!-- Script chung -->
   <script src="vetrangchu.js" defer></script>
   <script src="script.js" defer></script>
 </body>
+
 </html>
