@@ -84,9 +84,6 @@ window.addEventListener("DOMContentLoaded", () => {
     updateToggleText();
 });
 
-
-
-
 // Điều chỉnh căn lề của dropdown dựa trên vị trí
 function adjustDropdownAlignment(dropdown) {
     const rect = dropdown.getBoundingClientRect();
@@ -118,99 +115,92 @@ function applySavedMode() {
 // Gọi hàm applySavedMode để áp dụng chế độ khi tải trang
 applySavedMode();
 
-const tips = [
- "Mỗi ngày ăn no có thể nhận được hạt dẻ",
- "Món ăn đã nấu chỉ để được tối đa một ngày theo thời gian thực",
- "Mèo đen thích nhất nước thịt đóng hộp",
- "Muốn biết các vị trí thời trang nhận được bao nhiêu điểm? Nhấn 'Chi tiết' ở Bảng đánh giá để xem",
- "Đồ lấy từ trong tủ lạnh ra mà không nấu chỉ để được tối đa 5 ngày theo thời gian thực"
+// ----------------------
+// Tips chung
+// ----------------------
+function initTips(tipsArray, contentId, counterId, prevBtnId, nextBtnId, playPauseBtnId) {
+    let currentTip = 0;
+    let intervalId;
+
+    const contentEl = document.getElementById(contentId);
+    const counterEl = document.getElementById(counterId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    const playPauseBtn = document.getElementById(playPauseBtnId);
+
+    if (!contentEl || !counterEl || !prevBtn || !nextBtn || !playPauseBtn) return;
+
+    function showTip(index) {
+        contentEl.textContent = tipsArray[index];
+        counterEl.textContent = `${index + 1}/${tipsArray.length}`;
+    }
+
+    function startAutoPlay() {
+        intervalId = setInterval(() => {
+            currentTip = (currentTip + 1) % tipsArray.length;
+            showTip(currentTip);
+        }, 3000);
+    }
+
+    prevBtn.addEventListener("click", () => {
+        currentTip = (currentTip > 0) ? currentTip - 1 : tipsArray.length - 1;
+        showTip(currentTip);
+    });
+
+    nextBtn.addEventListener("click", () => {
+        currentTip = (currentTip + 1) % tipsArray.length;
+        showTip(currentTip);
+    });
+
+    playPauseBtn.addEventListener("click", () => {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+            playPauseBtn.textContent = "▶";
+        } else {
+            startAutoPlay();
+            playPauseBtn.textContent = "❚❚";
+        }
+    });
+
+    // Khởi tạo
+    showTip(currentTip);
+    startAutoPlay();
+}
+
+// ----------------------
+// Dữ liệu tips
+// ----------------------
+const homeTips = [
+    "Mỗi ngày ăn no có thể nhận được hạt dẻ",
+    "Món ăn đã nấu chỉ để được tối đa một ngày theo thời gian thực",
+    "Mèo đen thích nhất nước thịt đóng hộp",
+    "Muốn biết các vị trí thời trang nhận được bao nhiêu điểm? Nhấn 'Chi tiết' ở Bảng đánh giá để xem",
+    "Đồ lấy từ trong tủ lạnh ra mà không nấu chỉ để được tối đa 5 ngày theo thời gian thực"
 ];
 
 const vvannaChallengeTips = [
-  "Mục tiêu phối nhiều bộ, không được mặc trùng lặp.",
-  "Có thể vượt ải nhiều lần để hoàn thành dần từng mục tiêu.",
-  "Những đồ mặc để vượt ải (trừ tóc) phải nhuộm đúng theo mục tiêu đặt ra và nhuộm tối thiểu một khu đúng theo màu yêu cầu.",
-  "Khi chọn màu phải bấm lưu, bấm đúng màu mà không lưu thì mục tiêu màu sắc sẽ không được tính.".
-  "Về yêu cầu nhãn thì thường phải dùng ít nhất 3 món đúng nhãn mới được tính",
-  "Có 2 nhãn Đồng Phục, đừng tìm nhầm",
-  "Nếu không có sẵn đồ đúng nhãn thì vào bộ sưu tập tìm kiếm theo bộ lọc, xem cách nhận, chịu khó dò tìm đồ dễ lấy nhất.",
+    "Mục tiêu phối nhiều bộ, không được mặc trùng lặp.",
+    "Có thể vượt ải nhiều lần để hoàn thành dần từng mục tiêu.",
+    "Những đồ mặc để vượt ải (trừ tóc) phải nhuộm đúng theo mục tiêu đặt ra và nhuộm tối thiểu một khu đúng theo màu yêu cầu.",
+    "Khi chọn màu phải bấm lưu, bấm đúng màu mà không lưu thì mục tiêu màu sắc sẽ không được tính.",
+    "Về yêu cầu nhãn thì thường phải dùng ít nhất 3 món đúng nhãn mới được tính",
+    "Có 2 nhãn Đồng Phục, đừng tìm nhầm",
+    "Nếu không có sẵn đồ đúng nhãn thì vào bộ sưu tập tìm kiếm theo bộ lọc, xem cách nhận, chịu khó dò tìm đồ dễ lấy nhất."
 ];
 
-let currentTipIndex = 0;
-let intervalId;
-const tipsContent = document
- .getElementById("tipsContent");
-const playPauseBtn = document
- .getElementById("playPauseBtn");
-const tipCounter = document.getElementById("tipCounter"); 
+// ----------------------
+// Khởi tạo tips theo trang
+// ----------------------
+window.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById("tipsContent")) {
+        initTips(homeTips, "tipsContent", "tipCounter", "prevBtn", "nextBtn", "playPauseBtn");
+    }
+    if (document.getElementById("tipsvcContent")) {
+        initTips(vvannaChallengeTips, "tipsvcContent", "tipCounter", "prevBtn", "nextBtn", "playPauseBtn");
+    }
+});
 
-function showTip(index) {
- tipsContent.textContent = tips[index];
- updateCounter();
-}
-
-function updateCounter() {
-    tipCounter.textContent = `${currentTipIndex + 1}/${tips.length}`;
-}
-
-document.getElementById("prevBtn")
- .addEventListener("click", () => {
-  currentTipIndex = (currentTipIndex >
-    0) ? currentTipIndex - 1 : tips
-   .length - 1;
-  showTip(currentTipIndex);
- });
-
-document.getElementById("nextBtn")
- .addEventListener("click", () => {
-  currentTipIndex = (currentTipIndex +
-   1) % tips.length;
-  showTip(currentTipIndex);
- });
-
-// Bắt đầu chạy tự động khi trang được tải
-function startAutoPlay() {
- intervalId = setInterval(() => {
-  currentTipIndex = (currentTipIndex +
-   1) % tips.length;
-  showTip(currentTipIndex);
- }, 3000); // 3 giây
-}
-
-// Dừng hoặc chạy tự động khi bấm nút
-playPauseBtn.addEventListener("click",
- () => {
-  if (intervalId) {
-   clearInterval(intervalId);
-   intervalId = null;
-   playPauseBtn.textContent =
-    "▶"; // Chạy
-  } else {
-   startAutoPlay();
-   playPauseBtn.textContent =
-    "❚❚"; // Dừng
-  }
- });
-
-// Khởi tạo tip đầu tiên và bắt đầu tự động
-showTip(currentTipIndex);
-startAutoPlay();
-
-//kiểm tra nếu tồn tại #tipsvcContent thì gán tips từ mảng này
-if (document.getElementById("tipsvcContent")) {
-  let currentTip = 0;
-  const tips = vvannaChallengeTips; // dùng tips riêng cho trang này
-  const tipsvcContent = document.getElementById("tipsvcContent");
-  const tipCounter = document.getElementById("tipCounter");
-
-  function showTip(index) {
-    tipsvcContent.textContent = tips[index];
-    tipCounter.textContent = `${index+1}/${tips.length}`;
-  }
-
-  // gắn sự kiện cho prevBtn, nextBtn, playPauseBtn như ở Trang chủ
-  showTip(currentTip);
-}
 
 //Nút cuộn nhanh
 window.addEventListener("DOMContentLoaded", () => {
@@ -227,6 +217,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 
 
 
