@@ -218,6 +218,35 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// ----------------------
+// Tìm kiếm trong Thử thách Vvanna
+// ----------------------
+window.addEventListener("DOMContentLoaded", () => {
+  const searchBar = document.getElementById("searchBar");
+  const boxes = document.querySelectorAll(".challenge-box");
+  const noResult = document.getElementById("no-result");
+
+  if (searchBar && boxes.length > 0) {
+    searchBar.addEventListener("input", () => {
+      const query = searchBar.value.toLowerCase().trim();
+      let found = false;
+
+      boxes.forEach(box => {
+        const number = box.textContent.toLowerCase();
+        const text = box.getAttribute("data-text").toLowerCase();
+
+        if (number.includes(query) || text.includes(query)) {
+          box.style.display = "flex";
+          found = true;
+        } else {
+          box.style.display = "none";
+        }
+      });
+
+      noResult.style.display = found ? "none" : "block";
+    });
+  }
+});
 
 
 
