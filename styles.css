@@ -429,3 +429,28 @@ body.dark-mode input[type="text"]:focus {
 #scrollBottomBtn {
     bottom: 20px; /* cách đáy màn hình */
 }
+
+#challengeContainer {
+  display: flex;
+  flex-wrap: wrap;       /* Cho phép xuống dòng khi hẹp */
+  gap: 10px;             /* Khoảng cách giữa các hộp */
+  margin-top: 20px;
+}
+
+.challenge-box {
+  width: 60px;
+  height: 60px;
+  background-color: #f0f0f0;
+  border-radius: 12px;   /* Bo góc tròn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.challenge-box:hover {
+  transform: scale(1.1); /* Phóng to nhẹ khi hover */
+  background-color: #e0e0e0;
+}
