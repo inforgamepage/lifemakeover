@@ -433,13 +433,9 @@ body.dark-mode input[type="text"]:focus {
 .challenge-box {
   width: 80px;
   height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
   cursor: pointer;
+  margin-bottom: 40px;
   transition: transform 0.2s ease, background-color 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .challenge-box:hover {
