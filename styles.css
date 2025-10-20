@@ -432,8 +432,8 @@ body.dark-mode input[type="text"]:focus {
 
 /*Hộp thử thách*/
 .challenge-box {
-  width: 64px;
-  height: 48px;
+  width: 40px;
+  height: 30px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -460,8 +460,6 @@ body.dark-mode input[type="text"]:focus {
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin-top: 20px;
-  margin-bottom: 40px; /* 👈 Khoảng cách cố định với footer */
 }
 
 .main-container.vvannachallenge {
@@ -473,4 +471,5 @@ body.dark-mode input[type="text"]:focus {
   padding-top: 40px;
   padding-bottom: 40px;
 }
+
 
