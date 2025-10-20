@@ -467,9 +467,8 @@ body.dark-mode input[type="text"]:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 100px); /* trừ chiều cao navbar + footer */
-  padding-top: 10px;
-  padding-bottom: 10px;
+  min-height: calc(100vh - 30px); /* trừ chiều cao navbar + footer */
+
 }
 
 .search-wrapper {
@@ -477,5 +476,6 @@ body.dark-mode input[type="text"]:focus {
   justify-content: center;
   width: 100%;
 }
+
 
 
