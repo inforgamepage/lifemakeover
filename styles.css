@@ -472,5 +472,10 @@ body.dark-mode input[type="text"]:focus {
   padding-bottom: 10px;
 }
 
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
 
