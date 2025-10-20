@@ -462,20 +462,12 @@ body.dark-mode input[type="text"]:focus {
   gap: 12px;
 }
 
-.main-container.vvannachallenge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 30px); /* trừ chiều cao navbar + footer */
-
-}
-
 .search-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
 }
+
 
 
 
