@@ -452,7 +452,8 @@ body.dark-mode input[type="text"]:focus {
 }
 
 .dark-mode .challenge-box:hover {
-  color: rgb(102, 102, 102);
+  color: rgb(175, 175, 175);
+  background-color: rgb(102, 102, 102);
 }
 
 #challengeContainer {
@@ -467,6 +468,7 @@ body.dark-mode input[type="text"]:focus {
   justify-content: center;
   width: 100%;
 }
+
 
 
 
