@@ -468,8 +468,9 @@ body.dark-mode input[type="text"]:focus {
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 100px); /* trừ chiều cao navbar + footer */
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
+
 
 
