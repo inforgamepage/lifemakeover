@@ -469,6 +469,32 @@ body.dark-mode input[type="text"]:focus {
   width: 100%;
 }
 
+.stage-info {
+  margin: 10px 0 20px;
+  padding: 10px;
+  background: var(--background-secondary, #fafafa);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+.info-table th, .info-table td {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+}
+.label-box {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 10px;
+  color: #000;
+}
+.tips-section h4 {
+  margin: 8px 0 4px;
+}
+
 
 
 
