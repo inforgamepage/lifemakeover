@@ -258,3 +258,87 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+// ----------------------
+// Tự động tải dữ liệu từ Google Sheet (các chương 1–27)
+// ----------------------
+window.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("challengeContainer");
+  if (!container) return; // Nếu trang không có khối này thì bỏ qua
+
+  const API_URL = "https://script.google.com/macros/s/AKfycbzvytyT7ypoYT-9cZYeSPOHSxue-oOvAZDT4lvFxsL6CIIT01MjRsrWShnEQLAaQb_3Ag/exec";
+
+  const chapters = Array.from({ length: 27 }, (_, i) => `Chương ${i + 1}`);
+  container.innerHTML = "<p><em>Đang tải dữ liệu...</em></p>";
+
+  let html = "";
+
+  for (const chapter of chapters) {
+    try {
+      const res = await fetch(`${API_URL}?chapter=${encodeURIComponent(chapter)}`);
+      const data = await res.json();
+
+      if (!data || data.length === 0) continue;
+
+      html += `<h2 class="chapter-title">${chapter}</h2><div class="chapter-box">`;
+
+      for (const stage of data) {
+        html += `
+          <div class="challenge-box" 
+               data-id="${stage.id}" 
+               data-goal="${stage.goal || ''}" 
+               data-label="${stage.label?.text || ''}" 
+               data-color="${stage.label?.bgColor || '#ffffff'}">
+            ${stage.id}
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+    } catch (err) {
+      console.error(`Lỗi khi tải ${chapter}:`, err);
+    }
+  }
+
+  container.innerHTML = html || "<p>Không có dữ liệu nào được tải.</p>";
+
+  // Xử lý khi click vào từng ải
+  document.querySelectorAll(".challenge-box").forEach(box => {
+    box.addEventListener("click", () => {
+      const id = box.dataset.id;
+      const goal = box.dataset.goal || "Chưa có thông tin mục tiêu.";
+      const label = box.dataset.label || "";
+      const color = box.dataset.color || "#fff";
+
+      // Nếu đã tồn tại bảng thì xóa trước
+      const oldTable = document.getElementById("stage-info");
+      if (oldTable) oldTable.remove();
+
+      // Tạo bảng hiển thị bên dưới
+      const infoBox = document.createElement("div");
+      infoBox.id = "stage-info";
+      infoBox.className = "stage-info";
+      infoBox.innerHTML = `
+        <table class="info-table">
+          <tr><th>Ải</th><th>Mục tiêu</th><th>Nhãn</th><th>Màu khả dụng</th></tr>
+          <tr>
+            <td>${id}</td>
+            <td>${goal}</td>
+            <td><span class="label-box" style="background-color:${color}">${label}</span></td>
+            <td>(Đang cập nhật)</td>
+          </tr>
+        </table>
+        <div class="tips-section">
+          <h4>Mã gợi ý</h4>
+          <p>Quốc tế:</p>
+          <p>SGMY:</p>
+          <p>Nhật Bản:</p>
+          <p>Hàn Quốc:</p>
+        </div>
+      `;
+      box.insertAdjacentElement("afterend", infoBox);
+    });
+  });
+});
+
+
