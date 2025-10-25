@@ -248,82 +248,11 @@
   <!-- Script chung -->
   <script src="vetrangchu.js" defer></script>
   <script src="script.js" defer></script>
-    <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbzvytyT7ypoYT-9cZYeSPOHSxue-oOvAZDT4lvFxsL6CIIT01MjRsrWShnEQLAaQb_3Ag/exec";
-
-async function init() {
-  const chapterList = ["Chương 1", "Chương 2", "Chương 3"]; // có thể mở rộng thêm
-  const buttonsContainer = document.getElementById("buttons");
-  buttonsContainer.innerHTML = "";
-
-  for (const chapter of chapterList) {
-    const res = await fetch(`${API_URL}?chapter=${encodeURIComponent(chapter)}`);
-    const data = await res.json();
-
-    // tạo nhóm nút theo chương
-    const group = document.createElement("div");
-    group.innerHTML = `<h3>${chapter}</h3>`;
-    data.forEach(stage => {
-      const btn = document.createElement("button");
-      btn.textContent = stage.id;
-      btn.onclick = () => loadStage(chapter, stage.id);
-      group.appendChild(btn);
-    });
-    buttonsContainer.appendChild(group);
-  }
-}
-
-async function loadStage(chapter, stageId) {
-  const container = document.getElementById("result");
-  container.innerHTML = "<p><em>Đang tải dữ liệu...</em></p>";
-
-  try {
-    const res = await fetch(`${API_URL}?chapter=${encodeURIComponent(chapter)}`);
-    const data = await res.json();
-    const stage = data.find(x => x.id === stageId);
-
-    if (!stage) {
-      container.innerHTML = "<p style='color:red'>Không tìm thấy ải.</p>";
-      return;
-    }
-
-    container.innerHTML = `
-      <table class="stage-table">
-        <tr>
-          <th>Ải</th><th>Mục tiêu</th><th>Nhãn</th><th>Màu khả dụng</th>
-        </tr>
-        <tr>
-          <td>${stage.id}</td>
-          <td>${stage.goal}</td>
-          <td><span class="label" style="background:${stage.label.bgColor}">${stage.label.text}</span></td>
-          <td>
-            ${stage.colors.map(c => `
-              <div class="color-cell" style="background:${c.bgColor}" title="${c.text}"></div>
-            `).join("")}
-          </td>
-        </tr>
-      </table>
-
-      <div class="suggest">
-        <strong>Mã gợi ý</strong><br>
-        Quốc tế:<br>
-        SGMY:<br>
-        Nhật Bản:<br>
-        Hàn Quốc:
-      </div>
-    `;
-  } catch (err) {
-    container.innerHTML = `<p style="color:red">Lỗi khi tải dữ liệu: ${err.message}</p>`;
-  }
-}
-
-// khởi tạo danh sách nút tự động
-window.onload = init;
-</script>
 
 </body>
 
 </html>
+
 
 
 
