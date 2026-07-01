@@ -1,11 +1,11 @@
 const homeButton = document.getElementById("homepage");
 
 homeButton.addEventListener("click", function() {
-    window.location.href = "https://inforgamepage.github.io/lifemakeover/trangchu.html";
+    window.location.href = "https://inforgamepage.github.io/lifemakeover/";
 });
 
 homeButton.addEventListener("touchstart", function() {
-    window.location.href = "https://inforgamepage.github.io/lifemakeover/trangchu.html";
+    window.location.href = "https://inforgamepage.github.io/lifemakeover/";
 });
 
 
